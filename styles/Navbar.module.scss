@@ -1,0 +1,40 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.logo {
+	position: relative;
+	pointer-events: auto;
+	cursor: pointer;
+	top: 10px;
+	width: 10%;
+	height: 10%;
+	min-width: 90px;
+	min-height: 90px;
+	max-width: 110px;
+	max-height: 110px;
+}
+
+.burger {
+    cursor: pointer;
+}
+
+.burgerMenu,
+.burgerMenu::after {
+	height: 5px;
+	width: 50px;
+	background-color: black;
+	border-radius: 5px;
+}
+
+.burgerMenu {
+	margin: 3.25rem 3rem 0 0;
+	position: relative;
+
+	&::after {
+		content: "";
+		position: absolute;
+		top: 10px;
+	}
+}
