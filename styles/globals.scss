@@ -50,6 +50,7 @@
 	color: #fbb741;
 
 	&__title {
+		white-space: nowrap;
 		font-size: 2rem;
 		grid-area: title;
 		margin-top: 1rem;

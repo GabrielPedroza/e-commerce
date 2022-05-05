@@ -2,12 +2,24 @@ import React from "react"
 import { client } from "../lib/client"
 import { WavesOpacity, Product, HeroBanner } from "./components"
 
-// interface IHomeProps {
-// 	products: Array<object>
-// 	firesaleData: Array<object>
-// }
+interface IHomeProps {
+	products: Array<{
+		id: string
+		name: string
+		price: string
+		discount: string
+		desc: string
+		image: string
+	}>
+	firesaleData: Array<{
+		product: string
+		price: string
+		discount: string
+		desc: string
+	}>
+}
 
-const Home = ({ products, firesaleData }: any) => {
+const Home = ({ products, firesaleData }: IHomeProps) => {
 	// fix any
 	return (
 		<>
@@ -19,7 +31,7 @@ const Home = ({ products, firesaleData }: any) => {
 					role="listitem">
 					<div className="firesale-container">
 						<h2 className="firesale-h2__title">
-							🔥 Firesale of the day 🔥
+							🔥 Firesale of the week 🔥
 						</h2>
 						<h2 className="firesale-h2">
 							{firesaleData.length && firesaleData[0].discount}
