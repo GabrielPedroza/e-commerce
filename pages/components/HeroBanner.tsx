@@ -5,11 +5,13 @@ const HeroBanner = () => {
 	return (
 		<>
 			<div
+				role="banner"
 				className={styles.container}
 				aria-roledescription="This is the main page of Totem. Here, you can see what we broadly offer!">
-				<h1 className={styles.title}>
-					Represent <span className="offsetTitle">Spirituality</span>
+				<h1 role="heading" className={styles.title}>
+					Represent Spirituality
 				</h1>
+				<p className={styles.description}>"QUOTE" - AUTHOR</p>
 			</div>
 		</>
 	)

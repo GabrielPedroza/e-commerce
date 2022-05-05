@@ -8,7 +8,7 @@
 
 .custom-shape-divider-top-1651529940 {
 	position: absolute;
-	z-index: -10000;
+	z-index: -1;
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -18,12 +18,63 @@
 
 .custom-shape-divider-top-1651529940 svg {
 	position: relative;
-	z-index: -10000;
+	z-index: -1;
 	display: block;
 	width: calc(158% + 1.3px);
 	height: 106px;
 }
 
 .custom-shape-divider-top-1651529940 .shape-fill {
-	fill: #dbeeff;
+	fill: #fbb741;
+}
+
+.firesale-container {
+	display: grid;
+	margin: 2rem auto;
+	border-radius: 10px;
+	grid-template-columns: 1.25fr 2fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr;
+	grid-template-areas:
+		"title title title"
+		"product product price"
+		"product product desc";
+	min-height: 25em;
+	min-width: 90%;
+	max-width: 300px;
+	background-color: rgba($color: #fbb741, $alpha: 0.4);
+}
+
+.firesale-h2 {
+	font-weight: bold;
+	display: none;
+	color: #fbb741;
+
+	&__title {
+		font-size: 2rem;
+		grid-area: title;
+		margin-top: 1rem;
+		text-align: center;
+		text-transform: capitalize;
+		font-family: "Steelfish Rg", "helvetica neue", helvetica, arial,
+			sans-serif;
+	}
+}
+
+.firesale-h3 {
+	grid-area: price;
+	font-size: 1.5rem;
+	font-weight: bold;
+}
+
+.firesale-4 {
+	grid-area: product;
+	font-size: 1.5rem;
+	font-weight: bold;
+	text-align: center;
+}
+
+.firesale-p {
+	grid-area: desc;
+	font-size: 1.5rem;
+	font-weight: bold;
 }
