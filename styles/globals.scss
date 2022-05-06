@@ -29,15 +29,18 @@
 }
 
 .firesale-container {
-	display: grid;
+	// display: grid;
+	display: flex;
+	flex-direction: column;
 	margin: 2rem auto;
+
 	border-radius: 10px;
-	grid-template-columns: 1.25fr 2fr 1fr;
-	grid-template-rows: 1fr 1fr 1fr;
-	grid-template-areas:
-		"title title title"
-		"product product price"
-		"product product desc";
+	// grid-template-columns: 1.25fr 2fr 1fr;
+	// grid-template-rows: 1fr 1fr 1fr;
+	// grid-template-areas:
+	// 	"title title title"
+	// 	"product product price"
+	// 	"product product desc";
 	min-height: 25em;
 	min-width: 90%;
 	max-width: 300px;
@@ -47,14 +50,14 @@
 .firesale-h2 {
 	font-weight: bold;
 	display: none;
+	display: none;
 	color: #fbb741;
 
 	&__title {
-		white-space: nowrap;
-		font-size: 2rem;
 		grid-area: title;
-		margin-top: 1rem;
-		text-align: center;
+		white-space: nowrap;
+		font-size: 2em;
+		margin: 1rem auto;
 		text-transform: capitalize;
 		font-family: "Steelfish Rg", "helvetica neue", helvetica, arial,
 			sans-serif;
@@ -62,20 +65,39 @@
 }
 
 .firesale-h3 {
+	display: none;
 	grid-area: price;
 	font-size: 1.5rem;
 	font-weight: bold;
 }
 
-.firesale-4 {
-	grid-area: product;
+.firesale-h4 {
 	font-size: 1.5rem;
 	font-weight: bold;
 	text-align: center;
 }
 
+.firesale-img {
+	grid-area: product;
+	width: 95%;
+	height: auto;
+	max-width: 400px;
+	margin: 0 auto;
+	display: block;
+	border-radius: 10px;
+}
+
 .firesale-p {
+	max-width: 60ch;
+	padding: 1rem;
+	line-height: 1.25rem;
 	grid-area: desc;
-	font-size: 1.5rem;
+	font-size: 1rem;
 	font-weight: bold;
+}
+
+@media screen and (max-width: 470px) {
+	.firesale-h2__title {
+		font-size: 1.5rem;
+	}
 }

@@ -1,6 +1,5 @@
 .container {
 	min-width: 80%;
-	// min-height: 25vh;
 	margin-top: 100px;
 }
 
@@ -20,7 +19,13 @@
 	-webkit-font-smoothing: antialiased;
 }
 
-.description {
+.quote {
 	text-align: center;
-	margin-top: 1rem;
+	margin: 1rem 2rem;
+}
+
+@media screen and (max-width: 470px) {
+	.title {
+		font-size: 2.5rem;
+	}
 }
