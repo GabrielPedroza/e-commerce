@@ -4,7 +4,7 @@ import styles from "../../styles/HeroBanner.module.scss"
 interface IHeroBannerProps {
 	quote: string
 	author: string
-	props: any
+	props?: any
 }
 
 const HeroBanner = ({ quote, author, ...rest }: IHeroBannerProps) => {
@@ -21,6 +21,8 @@ const HeroBanner = ({ quote, author, ...rest }: IHeroBannerProps) => {
 					{`"${quote}" - ${author}`}
 				</p>
 			</div>
+			{Object.entries(rest).map(([key, value]) => null) // for future developers that wish to fork this repo and add more props
+} 
 		</>
 	)
 }

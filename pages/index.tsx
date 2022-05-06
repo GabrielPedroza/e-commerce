@@ -35,15 +35,24 @@ const Home = ({ products, firesaleData, quoteData }: IHomeProps) => {
 		<>
 			<div>
 				<WavesOpacity />
-				<HeroBanner quote={quote} author={author} props={quoteData[0]} />
+				<HeroBanner
+					quote={quote}
+					author={author}
+					props={quoteData[0]}
+				/>
 				<section
-					aria-details="A product with a massive discount!"
-					role="listitem">
-					<div className="firesale-container">
+					role="banner"
+					aria-details="A product with a massive discount!">
+					<div
+						className="firesale-container"
+						role="banner"
+						aria-roledescription="This is a single item that we showcase to show our customers the hottest deal of the day. As the same implies, the deal will last for 24 hours EST.">
 						<h2 className="firesale-h2__title">
 							🔥 Firesale of the day 🔥
 						</h2>
-						<h2 className="firesale-h2">
+						<h2
+							className="firesale-h2"
+							aria-label="How much we lowered the price; represented in percentage.">
 							{`${firesaleData.length && discount!}% off`}
 						</h2>
 						<h3 className="firesale-h3">
@@ -51,6 +60,7 @@ const Home = ({ products, firesaleData, quoteData }: IHomeProps) => {
 						</h3>
 						<img
 							className="firesale-img"
+							/* @ts-ignore | src needs to be a string or undefined to work, The type is ImageUrlBuilder so it can be dynamically changed from sanity */
 							src={urlFor(firesaleData && image!)}
 							alt={name ?? "Firesale image"}
 						/>
