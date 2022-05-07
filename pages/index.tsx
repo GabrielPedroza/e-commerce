@@ -1,24 +1,26 @@
 import React from "react"
 import { client } from "../lib/client"
-import { WavesOpacity, Product, HeroBanner } from "./components"
-import { urlFor } from "../lib/client"
+import { WavesOpacity, Product, HeroBanner, Firesale } from "./components"
+import { ImageUrlBuilder } from "next-sanity-image"
 
-interface IHomeProps {
+interface IHomeProps<T> {
 	products: Array<{
-		_id: "product"
+		_id: string
+		image: ImageUrlBuilder
 		name: string
-		price: string
-		discount: string
-		desc: string
-		image: string
+		slug: {
+			current: string
+		}
+		price: number
 	}>
 	firesaleData: Array<{
 		type?: "firesale"
 		name: string
-		image: any
-		price: string
-		discount: string
+		image: ImageUrlBuilder
+		price: number
+		discount: number
 		desc: string
+		rest: T
 	}>
 
 	quoteData: Array<{
@@ -27,9 +29,9 @@ interface IHomeProps {
 	}>
 }
 
-const Home = ({ products, firesaleData, quoteData }: IHomeProps) => {
-	const { name, image, price, discount, desc } = firesaleData[0]
-	const { name: quote, author } = quoteData[0]
+const Home = ({ products, firesaleData, quoteData }: IHomeProps<object>) => {
+	const { name, image, price, discount, desc, ...rest } = firesaleData[0] // will only have one object in firesaleData, hence the [0]
+	const { name: quote, author } = quoteData[0] // will only have one object in quoteData, hence the [0]
 
 	return (
 		<>
@@ -38,56 +40,25 @@ const Home = ({ products, firesaleData, quoteData }: IHomeProps) => {
 				<HeroBanner
 					quote={quote}
 					author={author}
-					props={quoteData[0]}
+					props={quoteData[0]} // not needed, but for future developers that wish to fork this repo and add more props
 				/>
-				<section
-					role="banner"
-					aria-details="A product with a massive discount!">
-					<div
-						className="firesale-container"
-						role="banner"
-						aria-roledescription="This is a single item that we showcase to show our customers the hottest deal of the day. As the same implies, the deal will last for 24 hours EST.">
-						<h2 className="firesale-h2__title">
-							🔥 Firesale of the day 🔥
-						</h2>
-						<h2
-							className="firesale-h2"
-							aria-label="How much we lowered the price; represented in percentage.">
-							{`${firesaleData.length && discount!}% off`}
-						</h2>
-						<h3 className="firesale-h3">
-							{`$${firesaleData.length && price!}`}
-						</h3>
-						<img
-							className="firesale-img"
-							/* @ts-ignore | src needs to be a string or undefined to work, The type is ImageUrlBuilder so it can be dynamically changed from sanity */
-							src={urlFor(firesaleData && image!)}
-							alt={name ?? "Firesale image"}
-						/>
-						<h4 className="firesale-h4">
-							{firesaleData.length && name!}
-						</h4>
-						<p className="firesale-p">
-							{firesaleData.length && desc!}
-						</p>
-					</div>
-				</section>
+				<Firesale {...firesaleData[0]} />
 				<p>section separator brbrbrbr</p>
-				<section
-					role="listitem"
-					aria-roledescription="This showcases what Totem offers">
+				<section aria-roledescription="This showcases what Totem offers">
 					add more details here later on
 					<p></p>
 					<h2>
 						What <i>Totem</i> offers
 					</h2>
-					{products?.map((product: any) => product) ?? null}
+					{products.map(product => (
+						<Product key={product._id} {...product} />
+					))}
 				</section>
 			</div>
 		</>
 	)
 }
-// this will work like a componentDidMount lifecycle useEffect hook. (It will run when the component is mounted)
+// this will work like a componentDidMount lifecycle / useEffect hook. (It will run when the component is mounted)
 export const getServerSideProps = async () => {
 	/* using server side rendering to get first contentful paint time faster and makes website available 
 	for social media and scrape bots. also improves seo. (alternative: ISR (Incremental Static Rendering)) */
