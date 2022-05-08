@@ -1,6 +1,6 @@
 import React from "react"
 import Link from "next/link"
-import styles from "../../styles/Navbar.module.scss"
+import styles from "../styles/Navbar.module.scss"
 
 const Navbar = () => {
 	return (
@@ -9,7 +9,7 @@ const Navbar = () => {
 				<Link href="/">
 					<img
 						className={styles.logo}
-						src="totem-logo-removebg-preview.png"
+						src="/totem-logo-removebg-preview.png"
 						alt="Totem Logo"
 						role="button"
 						aria-label="Logo"

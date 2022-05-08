@@ -1,5 +1,5 @@
 import { ImageUrlBuilder } from "next-sanity-image"
-import { urlFor } from "../../lib/client"
+import { urlFor } from "../lib/client"
 import React from "react"
 
 interface IFiresaleProps {
