@@ -1,6 +1,6 @@
 import React from "react"
 import { client } from "../lib/client"
-import { WavesOpacity, Product, HeroBanner, Firesale } from "./components"
+import { WavesOpacity, Product, HeroBanner, Firesale } from "../components"
 import { ImageUrlBuilder } from "next-sanity-image"
 
 interface IHomeProps<T> {
