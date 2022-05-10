@@ -16,9 +16,12 @@ interface IProductProps<T> {
 }
 
 const Product = ({ image, name, slug, price, ...rest }: IProductProps<object | undefined>) => {
+	console.log(image, name, slug, price);
+	
 	return (
 		<div className={styles.main_container}>
-			<Link href={`/product/${slug.current!}`}> {/* when container is clicked, it will be send to a dynamic file ([slug].ts) from product folder and will show the product dynamically isolated from other products with added features */}
+			{/* when container is clicked, it will be send to a dynamic file ([slug].ts) from product folder and will show the product dynamically isolated from other products with added features */}
+			<Link href={`/product/${slug.current}`}>
 				<div className={styles.productContainer}>
           {/* @ts-ignore | src needs to be a string or undefined to work; the type is ImageUrlBuilder so it can be dynamically changed from sanity */}
 					<img className={styles.image} src={urlFor(image && image[0]!)} alt={`Picture of ${name}. It only costs ${price} dollars!`}/> 
@@ -27,7 +30,7 @@ const Product = ({ image, name, slug, price, ...rest }: IProductProps<object | u
 					<div className={styles.price}>{price && price!}</div>
 				</div>
 			</Link>
-		</div>
+	</div>
 	)
 }
 
