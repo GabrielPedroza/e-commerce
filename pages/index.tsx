@@ -1,38 +1,52 @@
-import React from "react"
 import { client } from "../lib/client"
-import { WavesOpacity, Product, HeroBanner, Firesale } from "../components"
+import {
+	WavesOpacity,
+	HeroBanner,
+	Firesale,
+	ProductMarquee,
+} from "../components"
 import { ImageUrlBuilder } from "next-sanity-image"
 
-interface IHomeProps<T> {
-	products: Array<{
-		_id: string
-		image: ImageUrlBuilder
-		name: string
-		slug: {
-			current: string
-		}
-		price: number
-	}>
-	firesaleData: Array<{
-		type?: "firesale"
-		name: string
-		image: ImageUrlBuilder
-		price: number
-		discount: number
-		desc: string
-		rest: T
-	}>
+export type TProducts<T> = Array<{
+	_id: string
+	image: T
+	name: string
+	slug: {
+		current: string
+	}
+	price: number
+}>
 
-	quoteData: Array<{
-		name: string
-		author: string
-	}>
+export type TFiresaleData<T> = Array<{
+	type?: "firesale"
+	name: string
+	image: ImageUrlBuilder
+	price: number
+	discount: number
+	desc: string
+	rest: T
+}>
+
+export type quoteData = Array<{
+	name: string
+	author: string
+}>
+
+interface IHomeProps {
+	products: TProducts<Array<object>>
+
+	firesaleData: TFiresaleData<object>
+
+	quoteData: quoteData
 }
 
-const Home = ({ products, firesaleData, quoteData }: IHomeProps<object>) => {
-	const { name, image, price, discount, desc, ...rest } = firesaleData[0] // will only have one object in firesaleData, hence the [0]
+const Home = ({ products, firesaleData, quoteData }: IHomeProps) => {
+	const { name, image, price, discount, desc, ...rest } = firesaleData[0] // will only have one object in firesaleData, hence the [0]. rest isn't applicable for me but can be for other developers who fork and add more props
 	const { name: quote, author } = quoteData[0] // will only have one object in quoteData, hence the [0]
 
+	{
+		/* contains navbar and footer by default on all pages, hence why not explicitly written in the return statement. Written explicity in Layout.tsx under components folder */
+	}
 	return (
 		<>
 			<div>
@@ -43,17 +57,8 @@ const Home = ({ products, firesaleData, quoteData }: IHomeProps<object>) => {
 					props={quoteData[0]} // not needed, but for future developers that wish to fork this repo and add more props
 				/>
 				<Firesale {...firesaleData[0]} />
-				<p>section separator brbrbrbr</p>
-				<section aria-roledescription="This showcases what Totem offers">
-					add more details here later on
-					<p></p>
-					<h2>
-						What <i>Totem</i> offers
-					</h2>
-					{products.map(product => (
-						<Product key={product._id} {...product} />
-					))}
-				</section>
+				<p>section separator ignore</p>
+				<ProductMarquee products={products} />
 			</div>
 		</>
 	)

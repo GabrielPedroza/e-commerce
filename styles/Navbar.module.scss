@@ -15,27 +15,40 @@
 	max-width: 110px;
 	max-height: 110px;
 }
-
-.burger {
-	cursor: pointer;
-	padding: 2rem;
-	margin: 1.25rem 1rem 0 0;
+.cartQuantity {
+	position: absolute;
+	right: 12px;
+	top: 15px;
+	color: white;
+	background-color: #f02d34;
+	width: 22px;
+	height: 20px;
+	border-radius: 50%;
+	text-align: center;
+	font-weight: 600;
 }
 
-.burgerMenu,
-.burgerMenu::after {
-	height: 5px;
-	width: 50px;
-	background-color: black;
-	border-radius: 5px;
-}
-
-.burgerMenu {
+.shop {
 	position: relative;
-
-	&::after {
-		content: "";
-		position: absolute;
-		top: 10px;
-	}
+	cursor: pointer;
+	padding: 1rem;
+	margin: 1rem;
 }
+
+// .burgerMenu,
+// .burgerMenu::after {
+// 	height: 5px;
+// 	width: 50px;
+// 	background-color: black;
+// 	border-radius: 5px;
+// }
+
+// .burgerMenu {
+// 	position: relative;
+
+// 	&::after {
+// 		content: "";
+// 		position: absolute;
+// 		top: 10px;
+// 	}
+// }
