@@ -65,16 +65,23 @@ const Home = ({ products, firesaleData, quoteData }: IHomeProps) => {
 }
 // this will work like a componentDidMount lifecycle / useEffect hook. (It will run when the component is mounted)
 export const getServerSideProps = async () => {
-	/* using server side rendering to get first contentful paint time faster and makes website available 
-	for social media and scrape bots. also improves seo. (alternative: ISR (Incremental Static Rendering)) */
+	/* makes website available for social media and scrape bots. also improves seo. (alternative: ISR (Incremental Static Rendering)) */
 	const query = '*[_type == "product"]'
-	const products: Array<object> = await client.fetch(query)
-
 	const firesaleQuery = '*[_type == "firesale"]'
-	const firesaleData: Array<object> = await client.fetch(firesaleQuery)
-
 	const quoteQuery = '*[_type == "quote"]'
-	const quoteData: Array<object> = await client.fetch(quoteQuery)
+
+	interface ISSRProps {
+		products: TProducts<Array<object>>
+		firesaleData: TFiresaleData<object>
+		quoteData: quoteData
+	}
+
+	const [products, firesaleData, quoteData] = (await Promise.all([
+		// get all data from Sanity at once
+		client.fetch(query),
+		client.fetch(firesaleQuery),
+		client.fetch(quoteQuery),
+	])) as Array<ISSRProps>
 
 	return {
 		props: { products, firesaleData, quoteData },
