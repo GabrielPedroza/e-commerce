@@ -1,5 +1,5 @@
-import React from "react"
 import Product from "./Product"
+import styles from '../styles/ProductMarquee.module.scss'
 import type { TProducts } from "../pages/index"
 
 interface IProductMarqueeProps {
@@ -9,7 +9,7 @@ interface IProductMarqueeProps {
 const ProductMarquee = ({ products }: IProductMarqueeProps) => {
 	return (
 		<section aria-roledescription="This showcases what Totem offers">
-			<h2>Best Seller Products</h2>
+			<h2 className={styles.header}>Best Seller Products</h2>
 			{products.map(product => (
 				<Product key={product._id} {...product} />
 			))}

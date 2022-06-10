@@ -1,7 +1,5 @@
-import { ImageUrlBuilder } from "next-sanity-image"
 import Image from "next/image"
 import Link from "next/link"
-import React from "react"
 import { urlFor } from "../lib/client"
 import styles from '../styles/Product.module.scss'
 
@@ -17,9 +15,7 @@ interface IProductProps<T, K> {
 }
 
 const Product = ({ image, name, slug, price, ...rest }: IProductProps<object | undefined, Array<object>>) => {
-	const src = urlFor(image && image[0]!).url() // url() method stringifies the image url
-	console.log(src);
-	
+	const src = urlFor(image && image[0]!)?.url() // url() method stringifies the image url
 	return (
 		<div className={styles.main_container}>
 			{/* when container is clicked, it will be send to a dynamic file ([slug].ts) from product folder and will show the product dynamically isolated from other products with added features */}
@@ -31,7 +27,7 @@ const Product = ({ image, name, slug, price, ...rest }: IProductProps<object | u
 					</div>
 					{/* image[0] is used because each product will have multiple images (array of images from sanity) image[0] will be the default shown */}
 					<div className={styles.name}>{name && name!}</div>
-					<div className={styles.price}>{price && price!}</div>
+					<div className={styles.price}>{`$${price && price!}`}</div>
 				</div>
 			</Link>
 	</div>

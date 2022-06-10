@@ -1,4 +1,3 @@
-import React from "react"
 import styles from "../styles/HeroBanner.module.scss"
 
 interface IHeroBannerProps {

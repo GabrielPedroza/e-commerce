@@ -7,7 +7,8 @@ export const client = sanityClient({
 	dataset: "production",
 	apiVersion: "2022-04-27",
 	useCdn: true,
-	token: process.env.NEXT_PUBLIC_SANITY_TOKEN, // for security purposes
+	token: process.env.NEXT_PUBLIC_SANITY_TOKEN,
+	ignoreBrowserTokenWarning: true, // should not store token in client-side. best way is to store it is in the backend
 })
 
 const builder = imageUrlBuilder(client)

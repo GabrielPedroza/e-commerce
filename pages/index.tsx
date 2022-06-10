@@ -4,6 +4,8 @@ import {
 	HeroBanner,
 	Firesale,
 	ProductMarquee,
+	HorizontalDivider,
+	Candle,
 } from "../components"
 import { ImageUrlBuilder } from "next-sanity-image"
 
@@ -18,7 +20,7 @@ export type TProducts<T> = Array<{
 }>
 
 export type TFiresaleData<T> = Array<{
-	type?: "firesale"
+	type: "firesale"
 	name: string
 	image: ImageUrlBuilder
 	price: number
@@ -44,6 +46,8 @@ const Home = ({ products, firesaleData, quoteData }: IHomeProps) => {
 	const { name, image, price, discount, desc, ...rest } = firesaleData[0] // will only have one object in firesaleData, hence the [0]. rest isn't applicable for me but can be for other developers who fork and add more props
 	const { name: quote, author } = quoteData[0] // will only have one object in quoteData, hence the [0]
 
+	console.log(firesaleData[0])
+
 	{
 		/* contains navbar and footer by default on all pages, hence why not explicitly written in the return statement. Written explicity in Layout.tsx under components folder */
 	}
@@ -51,21 +55,23 @@ const Home = ({ products, firesaleData, quoteData }: IHomeProps) => {
 		<>
 			<div>
 				<WavesOpacity />
+				<Candle />
 				<HeroBanner
 					quote={quote}
 					author={author}
 					props={quoteData[0]} // not needed, but for future developers that wish to fork this repo and add more props
 				/>
 				<Firesale {...firesaleData[0]} />
-				<p>section separator ignore</p>
+				<HorizontalDivider />
 				<ProductMarquee products={products} />
 			</div>
 		</>
 	)
 }
-// this will work like a componentDidMount lifecycle / useEffect hook. (It will run when the component is mounted)
-export const getServerSideProps = async () => {
-	/* makes website available for social media and scrape bots. also improves seo. (alternative: ISR (Incremental Static Rendering)) */
+// data fetching is done in the getStaticProps function
+export const getStaticProps = async () => {
+	// fetching data from Sanity using SSG because in this specific e-commerce, it'll be static data.
+	// If this was a real e-commerce with dynamic data and multiple pages, we can combine SSR and SSG.
 	const query = '*[_type == "product"]'
 	const firesaleQuery = '*[_type == "firesale"]'
 	const quoteQuery = '*[_type == "quote"]'
