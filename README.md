@@ -4,6 +4,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 First, run the development server:
 
+Make sure to download all packages inside of the sanity folder and the root folder so it would run effectively. 
+
 ```bash
 npm run dev
 # or
