@@ -1,0 +1,95 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.custom-shape-divider-top-1651529940 {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.custom-shape-divider-top-1651529940 svg {
+  position: relative;
+  z-index: -1;
+  display: block;
+  width: calc(158% + 1.3px);
+  height: 106px;
+}
+
+.custom-shape-divider-top-1651529940 .shape-fill {
+  fill: #fbb741;
+}
+
+.firesale-container {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem auto;
+  border-radius: 10px;
+  min-height: 25em;
+  min-width: 90%;
+  max-width: 300px;
+  background-color: rgba(251, 183, 65, 0.4);
+}
+
+.firesale-h2 {
+  font-weight: bold;
+  display: none;
+  display: none;
+  color: #fbb741;
+}
+
+.firesale-h2__title {
+  grid-area: title;
+  white-space: nowrap;
+  font-size: 2em;
+  margin: 1rem auto;
+  text-transform: capitalize;
+  font-family: "Steelfish Rg", "helvetica neue", helvetica, arial, sans-serif;
+}
+
+.firesale-h3 {
+  display: none;
+  grid-area: price;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.firesale-h4 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.firesale-img {
+  grid-area: product;
+  width: 95%;
+  height: auto;
+  max-width: 400px;
+  margin: 0 auto;
+  display: block;
+  border-radius: 10px;
+}
+
+.firesale-p {
+  max-width: 60ch;
+  padding: 1rem;
+  line-height: 1.25rem;
+  grid-area: desc;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 470px) {
+  .firesale-h2__title {
+    font-size: 1.5rem;
+  }
+}
+/*# sourceMappingURL=globals.css.map */

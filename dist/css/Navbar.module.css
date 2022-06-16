@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo {
+  position: relative;
+  pointer-events: auto;
+  cursor: pointer;
+  top: 10px;
+  width: 10%;
+  height: 10%;
+  min-width: 90px;
+  min-height: 90px;
+  max-width: 110px;
+  max-height: 110px;
+}
+
+.cartQuantity {
+  position: absolute;
+  right: 12px;
+  top: 15px;
+  color: white;
+  background-color: #f02d34;
+  width: 22px;
+  height: 20px;
+  border-radius: 50%;
+  text-align: center;
+  font-weight: 600;
+}
+
+.shop {
+  position: relative;
+  cursor: pointer;
+  padding: 1rem;
+  margin: 1rem;
+}
+/*# sourceMappingURL=Navbar.module.css.map */

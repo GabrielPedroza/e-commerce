@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,OAAO,CAAC;EACJ,QAAQ,EAAE,QAAQ;EAClB,UAAU,EAAE,MAAM;EAClB,SAAS,EAAE,OAAO;EAClB,MAAM,EAAE,MAAM;CACjB",
+    "sources": [
+        "../../styles/ProductMarquee.module.scss"
+    ],
+    "names": [],
+    "file": "ProductMarquee.module.css"
+}

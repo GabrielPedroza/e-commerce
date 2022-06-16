@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,oBAAoB,CAAC;EACpB,MAAM,EAAE,MAAM;EACd,gBAAgB,EAAE,OAAO;EACzB,KAAK,EAAE,GAAG;EACV,MAAM,EAAE,GAAG;CACX",
+    "sources": [
+        "../../styles/HorizontalDivider.module.scss"
+    ],
+    "names": [],
+    "file": "HorizontalDivider.module.css"
+}
