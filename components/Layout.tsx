@@ -14,7 +14,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
 		<div className="layout">
 			<Head>
 				<title>Totem</title>
-				<link rel="shortcut icon" href="/static/favicon.ico" />
+				<link rel="shortcut icon" href="/favicon.ico" />
 				<meta charSet="UTF-8" />
 				<meta httpEquiv="X-UA-Compatible" content="IE=edge" />
 				<meta

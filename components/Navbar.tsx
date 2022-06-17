@@ -10,8 +10,9 @@ const Navbar = () => {
 				<Link href="/" passHref>
 					<div className={styles.logo}>
 						<Image
+							priority
 							className={styles.logo}
-							src="/totem-logo-removebg-preview.png"
+							src="/logo.png"
 							alt="Totem Logo"
 							layout="fill"
 							objectFit="cover"
@@ -21,17 +22,19 @@ const Navbar = () => {
 						/>
 					</div>
 				</Link>
-				<div
-					className={styles.shop}
-					aria-label="cart"
-					aria-roledescription="Click here to check out the items you've put in the cart">
-					<AiOutlineShopping size={40} />
-					<span
-						className={styles.cartQuantity}
-						aria-label="number of items in cart">
-						1
-					</span>
-				</div>
+				<>
+					<div
+						className={styles.shop}
+						aria-label="cart"
+						aria-roledescription="Click here to check out the items you've put in the cart">
+						<AiOutlineShopping size={40} />
+						<span
+							className={styles.cartQuantity}
+							aria-label="number of items in cart">
+							1
+						</span>
+					</div>
+				</>
 			</nav>
 		</>
 	)

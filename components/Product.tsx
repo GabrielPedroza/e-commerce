@@ -16,16 +16,16 @@ interface IProductProps<T, K> {
 
 const Product = ({ image, name, slug, price, ...rest }: IProductProps<object | undefined, Array<object>>) => {
 	const src = urlFor(image && image[0]!)?.url() // url() method stringifies the image url
+	{/* when container is clicked, it will be send to a dynamic file ([slug].ts) from product folder and will show the product dynamically isolated from other products with added features */}
+	{/* https://stackoverflow.com/questions/64909447/got-an-error-invalid-src-prop-here-is-a-link-on-next-image-hostname-loca */}
+	{/* image[0] is used because each product will have multiple images (array of images from sanity) image[0] will be the default shown */}
 	return (
 		<div className={styles.main_container}>
-			{/* when container is clicked, it will be send to a dynamic file ([slug].ts) from product folder and will show the product dynamically isolated from other products with added features */}
 			<Link href={`/product/${slug.current}`} passHref>
 				<div className={styles.productContainer}>
 					<div className={styles.image}>
-						<Image loader={() => src} src={src} unoptimized layout='fill' alt={`Picture of ${name}. It only costs ${price} dollars!`}/> 
-						{/* https://stackoverflow.com/questions/64909447/got-an-error-invalid-src-prop-here-is-a-link-on-next-image-hostname-loca */}
+						<Image loader={() => src} src={src} unoptimized loading="lazy" layout='fill' alt={`Picture of ${name}. It only costs ${price} dollars!`}/> 
 					</div>
-					{/* image[0] is used because each product will have multiple images (array of images from sanity) image[0] will be the default shown */}
 					<div className={styles.name}>{name && name!}</div>
 					<div className={styles.price}>{`$${price && price!}`}</div>
 				</div>

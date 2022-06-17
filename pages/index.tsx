@@ -46,8 +46,6 @@ const Home = ({ products, firesaleData, quoteData }: IHomeProps) => {
 	const { name, image, price, discount, desc, ...rest } = firesaleData[0] // will only have one object in firesaleData, hence the [0]. rest isn't applicable for me but can be for other developers who fork and add more props
 	const { name: quote, author } = quoteData[0] // will only have one object in quoteData, hence the [0]
 
-	console.log(firesaleData[0])
-
 	{
 		/* contains navbar and footer by default on all pages, hence why not explicitly written in the return statement. Written explicity in Layout.tsx under components folder */
 	}
