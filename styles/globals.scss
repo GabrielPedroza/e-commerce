@@ -31,9 +31,9 @@
 .firesale-container {
 	// display: grid;
 	display: flex;
+	cursor: pointer;
 	flex-direction: column;
 	margin: 2rem auto;
-
 	border-radius: 10px;
 	// grid-template-columns: 1.25fr 2fr 1fr;
 	// grid-template-rows: 1fr 1fr 1fr;
@@ -50,7 +50,6 @@
 
 .firesale-h2 {
 	font-weight: bold;
-	display: none;
 	display: none;
 	color: #fbb741;
 
@@ -72,20 +71,21 @@
 	font-weight: bold;
 }
 
+.firesale-image {
+	// grid-area: product;
+	position: relative;
+	width: 95%;
+	height: 200px;
+	max-width: 400px;
+	margin: 0 auto;
+	display: block;
+	border: 2px solid orange;
+}
+
 .firesale-h5 {
 	font-size: 1.5rem;
 	font-weight: bold;
 	text-align: center;
-}
-
-.firesale-img {
-	grid-area: product;
-	width: 95%;
-	height: auto;
-	max-width: 400px;
-	margin: 0 auto;
-	display: block;
-	border-radius: 10px;
 }
 
 .firesale-p {

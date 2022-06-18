@@ -1,4 +1,5 @@
 import { client } from "../lib/client"
+import { SanityImageSource } from "@sanity/image-url/lib/types/types"
 import {
 	WavesOpacity,
 	HeroBanner,
@@ -7,7 +8,6 @@ import {
 	HorizontalDivider,
 	Candle,
 } from "../components"
-import { ImageUrlBuilder } from "next-sanity-image"
 
 export type TProducts<T> = Array<{
 	_id: string
@@ -22,7 +22,10 @@ export type TProducts<T> = Array<{
 export type TFiresaleData<T> = Array<{
 	type: "firesale"
 	name: string
-	image: ImageUrlBuilder
+	slug: {
+		current: string
+	}
+	image: SanityImageSource
 	price: number
 	discount: number
 	desc: string

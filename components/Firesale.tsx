@@ -1,28 +1,43 @@
-import { ImageUrlBuilder } from "next-sanity-image"
 import { urlFor } from "../lib/client"
 import Link from "next/link"
+import Image from "next/image"
+import { SanityImageSource } from "@sanity/image-url/lib/types/types"
+import imgStyle from "../styles/FiresaleImage.module.scss"
 interface IFiresaleProps {
 	name: string
-	image: ImageUrlBuilder
+	image: SanityImageSource
 	price: number
 	discount: number
 	desc: string
 	type: string
-	rest: any
+	slug: {
+		current: string
+	}
+	rest: unknown
+}
+
+// helper function
+const nameToQueryConverter = (query: string) => {
+	const lowerCased = query.toLowerCase()
+	const regex = /\W+/g // removes any spaces
+	return lowerCased.replace(regex, "_")
 }
 
 const Firesale = ({
 	name,
 	image,
-	type = "firesale",
+	slug,
+	type,
 	price,
 	discount,
 	desc,
 	...rest // for future developers that wish to fork this repo and add more props
 }: IFiresaleProps) => {
+	const src = urlFor(image && image!)?.url()
+
 	return (
 		<>
-			<Link href={`/product/${type}`} passHref>
+			<Link href={`/product/firesale/${slug.current}`} passHref>
 				<div role="contentinfo">
 					<>
 						<div
@@ -40,22 +55,17 @@ const Firesale = ({
 							<h3 className="firesale-h3">{`$${
 								price && price!
 							}`}</h3>
-							<img
-								className="firesale-img"
-								/* @ts-ignore | src needs to be a string or undefined to work, The type is ImageUrlBuilder so it can be dynamically changed from sanity */
-								src={urlFor(image && image!)}
-								alt={
-									name ??
-									`Image of firesale product of the day: ${name!}`
-								}
-							/>
-							{/* <Image
-								loader={() => src}
-								src={src}
-								priority
-								layout="fill"
-								alt={`Picture of ${name}. It only costs ${price} dollars!`}
-							/> */}
+							<div className={"firesale-image"}>
+								<Image
+									loader={() => src}
+									src={src}
+									priority
+									unoptimized
+									layout="fill"
+									objectFit="cover"
+									alt={`Picture of ${name}. It only costs ${price} dollars!`}
+								/>
+							</div>
 							<p
 								aria-label="Name of product"
 								className="firesale-h5">

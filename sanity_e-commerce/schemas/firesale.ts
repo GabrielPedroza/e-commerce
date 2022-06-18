@@ -31,5 +31,14 @@ export default {
 			title: "Discount",
 			type: "number",
 		},
+		{
+			name: "slug", // unique identifier for product. if repeats, it will be automatically changed to a unique one
+			title: "Slug",
+			type: "slug",
+			options: {
+				source: "name",
+				maxLength: 96,
+			},
+		},
 	],
 }

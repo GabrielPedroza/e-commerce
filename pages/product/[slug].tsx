@@ -1,12 +1,37 @@
+import Image from "next/image"
 import { client, urlFor } from "../../lib/client"
 
-const ProductDetails = () => {
+type TProductDetail = {
+	image: string
+	name: string
+	details: string
+	price: string
+	[key: string]: unknown
+}
+
+interface IProductDetailsProps {
+	product: TProductDetail
+	products: Array<TProductDetail>
+}
+
+const ProductDetails = ({ product, products }: IProductDetailsProps) => {
+	const { image, name, details, price } = product
+	const src = urlFor(image && image[0]).url()
+
 	return (
 		<>
 			<div>
 				Product Container
 				<div>
-					Image
+					<Image
+						loader={() => src}
+						src={src}
+						unoptimized
+						loading="lazy"
+						objectFit="cover"
+						layout="fill"
+						alt={`Picture of ${name}. It only costs ${price} dollars!`}
+					/>
 					<div>Desc</div>
 				</div>
 			</div>
@@ -14,7 +39,7 @@ const ProductDetails = () => {
 	)
 }
 
-type IParamsProps = {
+export type IParamsProps = {
 	params: {
 		slug: unknown
 	}
@@ -26,23 +51,23 @@ interface ISSGProps<T> {
 	SuggestedProducts: T
 }
 
-type TProduct = {
-  products: {
-    product: object
-  }
+export type TProduct = {
+	slug: {
+		current: string
+	}
 }
 
 export const getStaticPaths = async () => {
-	const query = `*[_type == "product"] {
+	// required for static data in dynamic routes
+	const query = `*[_type == "product" && _type == "product"] {
     slug {
       current
     }
   }
   `
+	const products = (await client.fetch(query)) as Array<TProduct>
 
-	const products = (await client.fetch(query))
-
-	const paths = products.map(product => ({
+	const paths = products.map((product: TProduct) => ({
 		params: {
 			slug: product.slug.current,
 		},
