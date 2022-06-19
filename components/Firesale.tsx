@@ -16,7 +16,7 @@ interface IFiresaleProps {
 	rest: unknown
 }
 
-// helper function
+// helper function if needed
 const nameToQueryConverter = (query: string) => {
 	const lowerCased = query.toLowerCase()
 	const regex = /\W+/g // removes any spaces
@@ -48,7 +48,6 @@ const Firesale = ({
 							</h2>
 							<h2
 								className="firesale-h2"
-								// aria-label="How much we lowered the price; represented in percentage.">
 							>
 								{`${discount && discount!}% off`}
 							</h2>

@@ -59,7 +59,7 @@ export type TProduct = {
 
 export const getStaticPaths = async () => {
 	// required for static data in dynamic routes
-	const query = `*[_type == "product" && _type == "product"] {
+	const query = `*[_type == "product"] {
     slug {
       current
     }
