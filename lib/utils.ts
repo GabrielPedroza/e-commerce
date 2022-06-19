@@ -4,7 +4,7 @@ const firesaleconfetti = () => {
 	var end = Date.now() + 1.5 * 1000 // 1.5 seconds
 
 	// go Buckeyes!
-	var colors = ["#FFA500", "#4169E1"]
+	var colors = ["#FFA500", "#FF0000"]
 	;(function frame() {
 		confetti({
 			particleCount: 2,

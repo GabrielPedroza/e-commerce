@@ -1,5 +1,13 @@
 import Image from "next/image"
+import { Fragment } from "react"
 import { client, urlFor } from "../../lib/client"
+import {
+	AiOutlineMinus,
+	AiOutlinePlus,
+	AiFillStar,
+	AiOutlineStar,
+} from "react-icons/ai"
+import styles from "../../styles/EnhancedProduct.module.scss"
 
 type TProductDetail = {
 	image: string
@@ -17,12 +25,13 @@ interface IProductDetailsProps {
 const ProductDetails = ({ product, products }: IProductDetailsProps) => {
 	const { image, name, details, price } = product
 	const src = urlFor(image && image[0]).url()
+	console.log(products)
 
 	return (
 		<>
 			<div>
 				Product Container
-				<div>
+				<div className={styles.image}>
 					<Image
 						loader={() => src}
 						src={src}
@@ -32,7 +41,30 @@ const ProductDetails = ({ product, products }: IProductDetailsProps) => {
 						layout="fill"
 						alt={`Picture of ${name}. It only costs ${price} dollars!`}
 					/>
-					<div>Desc</div>
+					{products?.map(({ name, image, price }, i) => (
+						<Fragment key={i}>
+							{/* <div className={styles.image}>
+								<Image
+									loader={() => src}
+									src={urlFor(image)?.url()}
+									alt={`${name}. It costs ${price}`}
+								/>
+							</div> */}
+						</Fragment>
+					))}
+					<div className={styles.productDetailDesc}>
+						<h1>{name}</h1>
+						<div className={styles.reviews}>
+							<div>
+								<AiFillStar />
+								<AiFillStar />
+								<AiFillStar />
+								<AiFillStar />
+								<AiOutlineStar />
+							</div>
+							<p>(20)</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</>

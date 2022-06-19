@@ -4,3 +4,4 @@ coverage
 
 # Ignore files:
 Product.tsx 
+[slug].tsx
