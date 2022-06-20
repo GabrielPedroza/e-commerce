@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { Fragment } from "react"
+import { Fragment, useState } from "react"
 import { client, urlFor } from "../../lib/client"
 import {
 	AiOutlineMinus,
@@ -8,11 +8,12 @@ import {
 	AiOutlineStar,
 } from "react-icons/ai"
 import styles from "../../styles/EnhancedProduct.module.scss"
+import { SanityImageSource } from "@sanity/image-url/lib/types/types"
 
 type TProductDetail = {
-	image: string
+	image: SanityImageSource[]
 	name: string
-	details: string
+	description: string
 	price: string
 	[key: string]: unknown
 }
@@ -23,51 +24,81 @@ interface IProductDetailsProps {
 }
 
 const ProductDetails = ({ product, products }: IProductDetailsProps) => {
-	const { image, name, details, price } = product
-	const src = urlFor(image && image[0]).url()
-	console.log(products)
+	const { image, name, description, price } = product
+	const [index, setIndex] = useState(0)
+
+	const src = urlFor(image && image[index]!)?.url()
 
 	return (
-		<>
-			<div>
-				Product Container
-				<div className={styles.image}>
-					<Image
-						loader={() => src}
-						src={src}
-						unoptimized
-						loading="lazy"
-						objectFit="cover"
-						layout="fill"
-						alt={`Picture of ${name}. It only costs ${price} dollars!`}
-					/>
-					{products?.map(({ name, image, price }, i) => (
-						<Fragment key={i}>
-							{/* <div className={styles.image}>
-								<Image
-									loader={() => src}
-									src={urlFor(image)?.url()}
-									alt={`${name}. It costs ${price}`}
-								/>
-							</div> */}
-						</Fragment>
-					))}
-					<div className={styles.productDetailDesc}>
-						<h1>{name}</h1>
-						<div className={styles.reviews}>
-							<div>
-								<AiFillStar />
-								<AiFillStar />
-								<AiFillStar />
-								<AiFillStar />
-								<AiOutlineStar />
-							</div>
-							<p>(20)</p>
-						</div>
+		<div className={styles.container}>
+			<div className={styles.Bimage}>
+				<Image
+					loader={() => src}
+					src={src}
+					unoptimized
+					loading="lazy"
+					objectFit="cover"
+					layout="fill"
+					alt={`Picture of ${name}. It only costs ${price} dollars!`}
+				/>
+			</div>
+			{image?.map((item, i) => (
+				<Fragment key={i}>
+					<div className={styles.Limage}>
+						<Image
+							loader={() => src}
+							unoptimized
+							src={urlFor(item)?.url()}
+							layout="fill"
+							alt={`${name}. It costs ${price}`}
+							className={
+								i === index
+									? `${styles.smallImage} ${styles.selectedImage}`
+									: `${styles.smallImage}`
+							}
+							onMouseEnter={() => setIndex(i)}
+						/>
 					</div>
+				</Fragment>
+			))}
+			<hr />
+			<div className={styles.productDetailDesc}>
+				<h1>{name}</h1>
+				<div className={styles.reviews}>
+					<div className={styles.starReviews}>
+						<AiFillStar />
+						<AiFillStar />
+						<AiFillStar />
+						<AiFillStar />
+						<AiOutlineStar />
+					</div>
+					<p className={styles.reviewsNum}>(20)</p>
+				</div>
+				<h4 className={styles.desc}>Details: </h4>
+				<p>{description}</p>
+				<p className={styles.prices}>${price}</p>
+				<div className={styles.quantities}>
+					<h3>Quantity:</h3>
+					<p className={styles.quantityDesc}>
+						<span className={styles.minus}>
+							<AiOutlineMinus />
+						</span>
+						<span className={styles.num}>1</span>
+						<span className={styles.plus}>
+							<AiOutlinePlus />
+						</span>
+					</p>
+				</div>
+				<div className={styles.buttons}>
+					<button type="button" className={styles.addToCart}>
+						Add to Cart
+					</button>
+					<button type="button" className={styles.buyNow}>
+						Buy Now
+					</button>
 				</div>
 			</div>
-		</>
+		</div>
 	)
 }
 

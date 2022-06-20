@@ -4,8 +4,14 @@ import Image from "next/image"
 import { client, urlFor } from "../../../lib/client"
 import type { IParamsProps } from "../[slug]"
 import firesaleconfetti from "../../../lib/utils"
-import styles from "../../../styles/Firesale.module.scss"
+import styles from "../../../styles/EnhancedFiresale.module.scss"
 import { SanityImageSource } from "@sanity/image-url/lib/types/types"
+import {
+	AiFillStar,
+	AiOutlineMinus,
+	AiOutlinePlus,
+	AiOutlineStar,
+} from "react-icons/ai"
 
 type TFiresale = {
 	name: string
@@ -20,9 +26,6 @@ interface IFiresaleProps {
 
 const Firesale = ({ firesale }: IFiresaleProps) => {
 	const { name, desc, price, image, discount } = firesale[0] as TFiresale
-
-	console.log(firesale)
-
 	useEffect(() => {
 		firesaleconfetti()
 	}, [])
@@ -32,14 +35,53 @@ const Firesale = ({ firesale }: IFiresaleProps) => {
 	return (
 		<>
 			<div className={styles.container}>
-				<Image
-					loader={() => src}
-					unoptimized
-					src={src}
-					alt={`${name} is the firesale of the day!`}
-					layout="fill"
-					objectFit="cover"
-				/>
+				<div className={styles.Bimage}>
+					<Image
+						loader={() => src}
+						unoptimized
+						src={src}
+						alt={`${name} is the firesale of the day!`}
+						layout="fill"
+						objectFit="cover"
+					/>
+				</div>
+				<hr />
+				<div className={styles.productDetailDesc}>
+					<h1>{name}</h1>
+					<div className={styles.reviews}>
+						<div className={styles.starReviews}>
+							<AiFillStar />
+							<AiFillStar />
+							<AiFillStar />
+							<AiFillStar />
+							<AiOutlineStar />
+						</div>
+						<p className={styles.reviewsNum}>(20)</p>
+					</div>
+					<h4 className={styles.desc}>Details: </h4>
+					<p>{desc}</p>
+					<p className={styles.prices}>${price}</p>
+					<div className={styles.quantities}>
+						<h3>Quantity:</h3>
+						<p className={styles.quantityDesc}>
+							<span className={styles.minus}>
+								<AiOutlineMinus />
+							</span>
+							<span className={styles.num}>1</span>
+							<span className={styles.plus}>
+								<AiOutlinePlus />
+							</span>
+						</p>
+					</div>
+					<div className={styles.buttons}>
+						<button type="button" className={styles.addToCart}>
+							Add to Cart
+						</button>
+						<button type="button" className={styles.buyNow}>
+							Buy Now
+						</button>
+					</div>
+				</div>
 			</div>
 		</>
 	)
