@@ -42,25 +42,27 @@ const ProductDetails = ({ product, products }: IProductDetailsProps) => {
 					alt={`Picture of ${name}. It only costs ${price} dollars!`}
 				/>
 			</div>
-			{image?.map((item, i) => (
-				<Fragment key={i}>
-					<div className={styles.Limage}>
-						<Image
-							loader={() => src}
-							unoptimized
-							src={urlFor(item)?.url()}
-							layout="fill"
-							alt={`${name}. It costs ${price}`}
-							className={
-								i === index
-									? `${styles.smallImage} ${styles.selectedImage}`
-									: `${styles.smallImage}`
-							}
-							onMouseEnter={() => setIndex(i)}
-						/>
-					</div>
-				</Fragment>
-			))}
+			<div className={styles.LimageContainer}>
+				{image?.map((item, i) => (
+					<Fragment key={i}>
+						<div className={styles.Limage}>
+							<Image
+								loader={() => src}
+								unoptimized
+								src={urlFor(item)?.url()}
+								layout="fill"
+								alt={`${name}. It costs ${price}`}
+								className={
+									i === index
+										? `${styles.smallImage} ${styles.selectedImage}`
+										: `${styles.smallImage}`
+								}
+								onMouseEnter={() => setIndex(i)}
+							/>
+						</div>
+					</Fragment>
+				))}
+			</div>
 			<hr />
 			<div className={styles.productDetailDesc}>
 				<h1>{name}</h1>
@@ -78,7 +80,7 @@ const ProductDetails = ({ product, products }: IProductDetailsProps) => {
 				<p>{description}</p>
 				<p className={styles.prices}>${price}</p>
 				<div className={styles.quantities}>
-					<h3>Quantity:</h3>
+					<h3 className={styles.quant}>Quantity:</h3>
 					<p className={styles.quantityDesc}>
 						<span className={styles.minus}>
 							<AiOutlineMinus />

@@ -34,8 +34,22 @@
 	margin-bottom: 0.25rem;
 }
 
+.LimageContainer {
+	display: flex;
+	margin-bottom: 0.5rem;
+	margin-top: -1rem;
+}
+
 .Limage {
 	position: relative;
+	margin: 0.15rem;
+	width: 30px;
+	height: 30px;
+	transition: 0.3s;
+
+	&:hover {
+		filter: brightness(50%);
+	}
 }
 
 .productDetailDesc {
