@@ -46,10 +46,11 @@
 	width: 30px;
 	height: 30px;
 	transition: 0.3s;
+}
 
-	&:hover {
-		filter: brightness(50%);
-	}
+.selectedImage {
+	transition: 0.3s;
+	filter: brightness(50%);
 }
 
 .productDetailDesc {
