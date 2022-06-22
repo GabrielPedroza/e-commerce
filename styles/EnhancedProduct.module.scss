@@ -56,3 +56,38 @@
 .productDetailDesc {
 	margin-top: 2rem;
 }
+
+.quant,
+.quantityDesc {
+	display: inline-block;
+}
+
+.minus,
+.plus,
+.quantityDesc {
+	padding: 0.25rem 1.5rem;
+}
+
+.minus,
+.plus {
+	cursor: pointer;
+}
+
+.minus {
+	border: 2px solid #8d0e0e;
+	margin-left: -1.5rem;
+	margin-right: 1.5rem;
+	background-color: #f5a199;
+}
+
+.plus {
+	border: 2px solid #177f0d;
+	background-color: #caf9c4;
+	margin-left: 1.5rem;
+	margin-right: -1.5rem;
+}
+
+.quantityDesc {
+	margin-left: 1rem;
+	border: 1.5px solid #ccc;
+}

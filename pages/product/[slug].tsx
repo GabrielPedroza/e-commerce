@@ -27,7 +27,7 @@ const ProductDetails = ({ product, products }: IProductDetailsProps) => {
 	const { image, name, description, price } = product
 	const [index, setIndex] = useState(0)
 
-	const src = urlFor(image && image[index]!)?.url()
+	const src = urlFor(image && image[index]!)?.url() ?? "No image"
 
 	return (
 		<div className={styles.container}>
