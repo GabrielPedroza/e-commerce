@@ -1,4 +1,4 @@
-import React, { ReactChild, ReactChildren } from "react"
+import React, { ReactChild } from "react"
 import Marquee from "react-fast-marquee"
 
 interface Props {

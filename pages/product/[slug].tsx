@@ -1,7 +1,7 @@
 import Image from "next/image"
 import { Fragment, useState } from "react"
 import { client, urlFor } from "../../lib/client"
-import { nameToQueryConverter } from '../../components/Firesale'
+import { nameToQueryConverter } from "../../components/Firesale"
 import {
 	AiOutlineMinus,
 	AiOutlinePlus,
@@ -31,7 +31,7 @@ interface IProductDetailsProps {
 
 const ProductDetails = ({ product, products }: IProductDetailsProps) => {
 	const { image, name, description, price, slug } = product
-	
+
 	const [index, setIndex] = useState(0)
 
 	const src = urlFor(image && image[index]!)?.url() ?? "No image"
@@ -107,8 +107,14 @@ const ProductDetails = ({ product, products }: IProductDetailsProps) => {
 					</button>
 				</div>
 				<h4 className={styles.h4}>You may also like:</h4>
-				<div className={styles.marqueeContainer}>
-					<Marquee pauseOnHover gradientWidth={25} speed={30} pauseOnClick>
+				<div
+					className={styles.marqueeContainer}
+					onClick={() => setIndex(0)}>
+					<Marquee
+						pauseOnHover
+						gradientWidth={25}
+						speed={30}
+						pauseOnClick>
 						{products.map(
 							(item, i) =>
 								slug.current !== item.slug.current && ( // current product isn't shown in the marquee
