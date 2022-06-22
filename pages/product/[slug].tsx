@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { Fragment, useState } from "react"
 import { client, urlFor } from "../../lib/client"
+import { nameToQueryConverter } from '../../components/Firesale'
 import {
 	AiOutlineMinus,
 	AiOutlinePlus,
@@ -9,10 +10,15 @@ import {
 } from "react-icons/ai"
 import styles from "../../styles/EnhancedProduct.module.scss"
 import { SanityImageSource } from "@sanity/image-url/lib/types/types"
+import Marquee from "react-fast-marquee"
+import Link from "next/link"
 
 type TProductDetail = {
 	image: SanityImageSource[]
 	name: string
+	slug: {
+		current: string
+	}
 	description: string
 	price: string
 	[key: string]: unknown
@@ -24,7 +30,8 @@ interface IProductDetailsProps {
 }
 
 const ProductDetails = ({ product, products }: IProductDetailsProps) => {
-	const { image, name, description, price } = product
+	const { image, name, description, price, slug } = product
+	
 	const [index, setIndex] = useState(0)
 
 	const src = urlFor(image && image[index]!)?.url() ?? "No image"
@@ -98,6 +105,34 @@ const ProductDetails = ({ product, products }: IProductDetailsProps) => {
 					<button type="button" className={styles.buyNow}>
 						Buy Now
 					</button>
+				</div>
+				<h4 className={styles.h4}>You may also like:</h4>
+				<div className={styles.marqueeContainer}>
+					<Marquee pauseOnHover gradientWidth={25} speed={30} pauseOnClick>
+						{products.map(
+							(item, i) =>
+								slug.current !== item.slug.current && ( // current product isn't shown in the marquee
+									<Fragment key={i}>
+										<div className={styles.Pimage}>
+											<Link
+												href={`/product/${item.slug.current}`}
+												passHref>
+												<Image
+													loader={() => src}
+													unoptimized
+													src={urlFor(
+														item.image[0]!
+													)?.url()}
+													layout="fill"
+													alt={`${name}. It costs ${price}`}
+													className={styles.marquee}
+												/>
+											</Link>
+										</div>
+									</Fragment>
+								)
+						)}
+					</Marquee>
 				</div>
 			</div>
 		</div>

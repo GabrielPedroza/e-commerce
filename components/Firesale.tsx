@@ -17,7 +17,7 @@ interface IFiresaleProps {
 }
 
 // helper function if needed
-const nameToQueryConverter = (query: string) => {
+export const nameToQueryConverter = (query: string) => {
 	const lowerCased = query.toLowerCase()
 	const regex = /\W+/g // removes any spaces
 	return lowerCased.replace(regex, "_")

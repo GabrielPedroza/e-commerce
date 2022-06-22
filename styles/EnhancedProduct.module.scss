@@ -91,3 +91,46 @@
 	margin-left: 1rem;
 	border: 1.5px solid #ccc;
 }
+
+.buttons {
+	display: flex;
+	justify-content: space-around;
+	margin: 2rem;
+}
+
+.addToCart,
+.buyNow {
+	border: 2px solid #ff8c00;
+	transition: 0.3s;
+	background-color: #fbb741;
+	padding: 1rem 4rem;
+	cursor: pointer;
+	font-size: 1.25rem;
+	white-space: nowrap;
+
+	&:hover {
+		background-color: orange;
+	}
+}
+
+.addToCart {
+	margin-right: 0.5rem;
+}
+
+.marqueeContainer {
+	position: relative;
+	cursor: pointer;
+}
+
+.h4 {
+	text-align: center;
+	font-size: 1.5rem;
+	margin-bottom: 1rem;
+}
+
+.Pimage {
+	position: relative;
+	width: 200px;
+	height: 200px;
+	margin: 0.25rem;
+}
