@@ -1,7 +1,11 @@
-import React from "react"
+import React, { ReactChild, ReactChildren } from "react"
 import Marquee from "react-fast-marquee"
 
-const ProductMarquee = ({ children }: any) => {
+interface Props {
+	children: ReactChild | ReactChild[]
+}
+
+const ProductMarquee = ({ children }: Props) => {
 	return <Marquee>{children}</Marquee>
 }
 
