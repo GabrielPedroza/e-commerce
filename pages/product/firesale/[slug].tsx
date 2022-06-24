@@ -1,8 +1,7 @@
 import { useEffect } from "react"
-import { TProduct } from "../[slug]"
+import { IParamsProps, TProduct } from "../[slug]"
 import Image from "next/image"
 import { client, urlFor } from "../../../lib/client"
-import type { IParamsProps } from "../[slug]"
 import firesaleconfetti from "../../../lib/utils"
 import styles from "../../../styles/EnhancedFiresale.module.scss"
 import { SanityImageSource } from "@sanity/image-url/lib/types/types"
@@ -25,7 +24,7 @@ interface IFiresaleProps {
 }
 
 const Firesale = ({ firesale }: IFiresaleProps) => {
-	const { name, desc, price, image, discount } = firesale[0] as TFiresale
+	const { name, desc, price, image, discount } = firesale[0]
 	useEffect(() => {
 		firesaleconfetti()
 	}, [])
@@ -118,4 +117,5 @@ export const getStaticProps = async ({ params: { slug } }: IParamsProps) => {
 		props: { firesale },
 	}
 }
+
 export default Firesale
