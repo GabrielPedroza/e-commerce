@@ -2,8 +2,10 @@ import { AiOutlineShopping } from "react-icons/ai"
 import Link from "next/link"
 import Image from "next/image"
 import styles from "../styles/Navbar.module.scss"
+import { useStateContext } from "../context/StateContext"
 
 const Navbar = () => {
+	const { totalQuantities } = useStateContext()
 	return (
 		<>
 			<nav className={styles.container}>
@@ -31,7 +33,7 @@ const Navbar = () => {
 						<span
 							className={styles.cartQuantity}
 							aria-label="number of items in cart">
-							1
+							{totalQuantities}
 						</span>
 					</div>
 				</>

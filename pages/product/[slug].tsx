@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { Fragment, useState } from "react"
+import { forwardRef, Fragment, useState } from "react"
 import { client, urlFor } from "../../lib/client"
 import {
 	AiOutlineMinus,
@@ -11,16 +11,18 @@ import styles from "../../styles/EnhancedProduct.module.scss"
 import { SanityImageSource } from "@sanity/image-url/lib/types/types"
 import Marquee from "react-fast-marquee"
 import Link from "next/link"
+import { useStateContext } from "../../context/StateContext"
 
-type TProductDetail = {
+export type TProductDetail = {
 	image: SanityImageSource[]
 	name: string
 	slug: {
 		current: string
 	}
 	description: string
-	price: string
-	[key: string]: unknown
+	price: number
+	quantity: number
+	[key: string]: any
 }
 
 interface IProductDetailsProps {
@@ -30,6 +32,8 @@ interface IProductDetailsProps {
 
 const ProductDetails = ({ product, products }: IProductDetailsProps) => {
 	const { image, name, description, price, slug } = product
+
+	const { incQty, decQty, qty, addToCart } = useStateContext()
 
 	const [index, setIndex] = useState(0)
 
@@ -54,6 +58,7 @@ const ProductDetails = ({ product, products }: IProductDetailsProps) => {
 						<div className={styles.Limage}>
 							<Image
 								loader={() => src}
+								priority
 								unoptimized
 								src={urlFor(item)?.url()}
 								layout="fill"
@@ -88,17 +93,20 @@ const ProductDetails = ({ product, products }: IProductDetailsProps) => {
 				<div className={styles.quantities}>
 					<h3 className={styles.quant}>Quantity:</h3>
 					<p className={styles.quantityDesc}>
-						<span className={styles.minus}>
+						<span className={styles.minus} onClick={decQty}>
 							<AiOutlineMinus />
 						</span>
-						<span className={styles.num}>1</span>
-						<span className={styles.plus}>
+						<span className={styles.num}>{qty}</span>
+						<span className={styles.plus} onClick={incQty}>
 							<AiOutlinePlus />
 						</span>
 					</p>
 				</div>
 				<div className={styles.buttons}>
-					<button type="button" className={styles.addToCart}>
+					<button
+						type="button"
+						className={styles.addToCart}
+						onClick={() => addToCart(product, qty)}>
 						Add to Cart
 					</button>
 					<button type="button" className={styles.buyNow}>
