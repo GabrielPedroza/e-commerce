@@ -33,4 +33,9 @@
 	cursor: pointer;
 	padding: 1rem;
 	margin: 1rem;
+	transition: 0.3s;
+
+	&:hover {
+		transform: scale(1.15);
+	}
 }

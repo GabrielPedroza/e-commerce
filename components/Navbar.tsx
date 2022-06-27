@@ -3,9 +3,10 @@ import Link from "next/link"
 import Image from "next/image"
 import styles from "../styles/Navbar.module.scss"
 import { useStateContext } from "../context/StateContext"
+import Cart from "./Cart"
 
 const Navbar = () => {
-	const { totalQuantities } = useStateContext()
+	const { totalQuantities, showCart } = useStateContext()
 	return (
 		<>
 			<nav className={styles.container}>
@@ -37,6 +38,7 @@ const Navbar = () => {
 						</span>
 					</div>
 				</>
+				{showCart && <Cart />}
 			</nav>
 		</>
 	)

@@ -8,6 +8,7 @@ interface IStateContextProps {
 
 const defaultState = {
 	qty: 1,
+  showCart: false,
   totalQuantities: 0,
 	incQty: () => {},
 	decQty: () => {},
@@ -78,7 +79,7 @@ export const StateContext = ({ children }: IStateContextProps) => {
 	return (
 		<Context.Provider
 			value={{
-				// showCart,
+				showCart,
 				// setShowCart,
 				// cartItems,
 				// setCartItems,
