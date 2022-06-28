@@ -13,7 +13,7 @@ interface IStateContextProps {
 	children: ReactChild | ReactChild[]
 }
 
-interface AppContextInterface {
+export interface AppContextInterface {
 	qty: number
 	showCart: boolean
 	cartItems: Array<object>
@@ -21,9 +21,9 @@ interface AppContextInterface {
 	setTotalPrice: Dispatch<SetStateAction<number>>
 	setQty: Dispatch<SetStateAction<number>>
 	setCartItems: Dispatch<SetStateAction<Array<TProductDetail>>>
+	totalQuantities: number
 	setTotalQuantities: Dispatch<SetStateAction<number>>
 	setShowCart: Dispatch<SetStateAction<boolean>>
-	totalQuantities: number
 	incQty: () => void
 	decQty: () => void
 	addToCart: (product: TProductDetail, quantity: number) => void

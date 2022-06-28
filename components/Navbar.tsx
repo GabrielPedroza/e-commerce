@@ -2,11 +2,13 @@ import { AiOutlineShopping } from "react-icons/ai"
 import Link from "next/link"
 import Image from "next/image"
 import styles from "../styles/Navbar.module.scss"
-import { useStateContext } from "../context/StateContext"
+import { AppContextInterface, useStateContext } from "../context/StateContext"
 import Cart from "./Cart"
 
 const Navbar = () => {
-	const { totalQuantities, showCart, setShowCart } = useStateContext()
+	const { totalQuantities, showCart, setShowCart } =
+		useStateContext() as AppContextInterface
+
 	return (
 		<>
 			<nav className={styles.container}>
@@ -29,7 +31,6 @@ const Navbar = () => {
 					<div
 						className={styles.shop}
 						aria-label="cart"
-						onClick={setShowCart(s => !s)}
 						aria-roledescription="Click here to check out the items you've put in the cart">
 						<AiOutlineShopping size={40} />
 						<span
