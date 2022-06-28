@@ -31,6 +31,7 @@ const Navbar = () => {
 					<div
 						className={styles.shop}
 						aria-label="cart"
+						onClick={() => setShowCart(s => (s = !s))}
 						aria-roledescription="Click here to check out the items you've put in the cart">
 						<AiOutlineShopping size={40} />
 						<span
