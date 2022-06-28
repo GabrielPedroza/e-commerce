@@ -6,7 +6,7 @@ import { useStateContext } from "../context/StateContext"
 import Cart from "./Cart"
 
 const Navbar = () => {
-	const { totalQuantities, showCart } = useStateContext()
+	const { totalQuantities, showCart, setShowCart } = useStateContext()
 	return (
 		<>
 			<nav className={styles.container}>
@@ -29,6 +29,7 @@ const Navbar = () => {
 					<div
 						className={styles.shop}
 						aria-label="cart"
+						onClick={setShowCart(s => !s)}
 						aria-roledescription="Click here to check out the items you've put in the cart">
 						<AiOutlineShopping size={40} />
 						<span

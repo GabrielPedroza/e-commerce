@@ -1,4 +1,11 @@
-import React, { ReactChild, createContext, useState, useContext } from "react"
+import React, {
+	ReactChild,
+	createContext,
+	useState,
+	useContext,
+	SetStateAction,
+	Dispatch,
+} from "react"
 import { toast } from "react-toastify"
 import type { TProductDetail } from "../pages/product/[slug]"
 
@@ -6,16 +13,23 @@ interface IStateContextProps {
 	children: ReactChild | ReactChild[]
 }
 
-const defaultState = {
-	qty: 1,
-  showCart: false,
-  totalQuantities: 0,
-	incQty: () => {},
-	decQty: () => {},
-	addToCart: (product: TProductDetail, quantity: number) => {},
+interface AppContextInterface {
+	qty: number
+	showCart: boolean
+	cartItems: Array<object>
+	totalPrice: number
+	setTotalPrice: Dispatch<SetStateAction<number>>
+	setQty: Dispatch<SetStateAction<number>>
+	setCartItems: Dispatch<SetStateAction<Array<TProductDetail>>>
+	setTotalQuantities: Dispatch<SetStateAction<number>>
+	setShowCart: Dispatch<SetStateAction<boolean>>
+	totalQuantities: number
+	incQty: () => void
+	decQty: () => void
+	addToCart: (product: TProductDetail, quantity: number) => void
 }
 
-const Context = createContext(defaultState)
+const Context = createContext<AppContextInterface | null>(null)
 
 export const StateContext = ({ children }: IStateContextProps) => {
 	const [showCart, setShowCart] = useState(false)
@@ -61,7 +75,7 @@ export const StateContext = ({ children }: IStateContextProps) => {
 			}
 		)
 
-		setQty(c => c = 1)
+		setQty(c => (c = 1))
 	}
 
 	const incQty = () => {
@@ -80,14 +94,14 @@ export const StateContext = ({ children }: IStateContextProps) => {
 		<Context.Provider
 			value={{
 				showCart,
-				// setShowCart,
-				// cartItems,
-				// setCartItems,
-				// totalPrice,
-				// setTotalPrice,
+				setShowCart,
+				cartItems,
+				setCartItems,
+				totalPrice,
+				setTotalPrice,
 				totalQuantities,
-				// setTotalQuantities,
-				// setQty,
+				setTotalQuantities,
+				setQty,
 				addToCart,
 				qty,
 				incQty,
