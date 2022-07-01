@@ -25,7 +25,7 @@ export type TFiresaleData<T> = Array<{
 	slug: {
 		current: string
 	}
-	image: SanityImageSource
+	image: SanityImageSource[]
 	price: number
 	discount: number
 	desc: string

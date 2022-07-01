@@ -1,4 +1,3 @@
-import React, { useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import {
@@ -8,12 +7,11 @@ import {
 	AiOutlineShopping,
 } from "react-icons/ai"
 import { TiDeleteOutline } from "react-icons/ti"
-import toast from "react-toastify"
+import { toast } from "react-toastify"
 import type { AppContextInterface } from "../context/StateContext"
-
 import { useStateContext } from "../context/StateContext"
 import { urlFor } from "../lib/client"
-// import getStripe from "../lib/getStripe"
+import getStripe from "../lib/getStripe"
 import styles from "../styles/Cart.module.scss"
 
 const Cart = () => {
@@ -26,27 +24,27 @@ const Cart = () => {
 		onRemove,
 	} = useStateContext() as AppContextInterface
 
-	// const handleCheckout = async () => {
-	// 	const stripe = await getStripe()
+	const handleCheckout = async () => {
+		const stripe = await getStripe()
 
-	// 	const response = await fetch("/api/stripe", {
-	// 		method: "POST",
-	// 		headers: {
-	// 			"Content-Type": "application/json",
-	// 		},
-	// 		body: JSON.stringify(cartItems),
-	// 	})
+		const response = await fetch("/api/stripe", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(cartItems),
+		})
 
-	// if (response.statusCode === 500) return
+		if (response.status === 500) return
 
-	// const data = await response.json()
+		const data = await response.json()
 
-	// toast.loading("Redirecting...")
+		toast.loading("Redirecting...")
 
-	// stripe.redirectToCheckout({ sessionId: data.id })
-	// }
+		stripe.redirectToCheckout({ sessionId: data.id })
+		console.log(cartItems)
+	}
 
-	console.log(cartItems)
 
 	return (
 		<div className={styles.cartWrapper}>
@@ -149,8 +147,7 @@ const Cart = () => {
 							<button
 								type="button"
 								className={styles.btn}
-								// onClick={handleCheckout}
-							>
+								onClick={handleCheckout}>
 								Pay with Stripe
 							</button>
 						</div>

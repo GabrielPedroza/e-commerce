@@ -9,7 +9,6 @@ import React, {
 import { toast } from "react-toastify"
 import { TFiresale } from "../pages/product/firesale/[slug]"
 import type { TProductDetail } from "../pages/product/[slug]"
-import product from "../sanity_e-commerce/schemas/product"
 
 interface IStateContextProps {
 	children: ReactChild | ReactChild[]
