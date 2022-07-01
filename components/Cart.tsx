@@ -17,7 +17,6 @@ import { urlFor } from "../lib/client"
 import styles from "../styles/Cart.module.scss"
 
 const Cart = () => {
-	const cartRef = useRef(null)
 	const {
 		totalPrice,
 		totalQuantities,
@@ -50,7 +49,7 @@ const Cart = () => {
 	console.log(cartItems)
 
 	return (
-		<div className={styles.cartWrapper} ref={cartRef}>
+		<div className={styles.cartWrapper}>
 			<div className={styles.cartContainer}>
 				<button
 					type="button"
