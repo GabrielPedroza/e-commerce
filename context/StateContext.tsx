@@ -9,6 +9,7 @@ import React, {
 import { toast } from "react-toastify"
 import { TFiresale } from "../pages/product/firesale/[slug]"
 import type { TProductDetail } from "../pages/product/[slug]"
+import product from "../sanity_e-commerce/schemas/product"
 
 interface IStateContextProps {
 	children: ReactChild | ReactChild[]
@@ -30,7 +31,7 @@ export interface AppContextInterface {
 	incQty: () => void
 	decQty: () => void
 	addToCart: (product: Group, quantity: number) => void
-	toggleCartItemQuanitity: Function
+	toggleCartItemQuantity: Function
 	onRemove: Function
 }
 
@@ -44,7 +45,7 @@ export const StateContext = ({ children }: IStateContextProps) => {
 	const [qty, setQty] = useState(1)
 
 	let foundProduct: Group | undefined
-	let index
+	let index: number
 
 	const addToCart = (product: Group, quantity: number) => {
 		const isProductInCart = cartItems.find(
@@ -113,33 +114,36 @@ export const StateContext = ({ children }: IStateContextProps) => {
 		setCartItems(newCartItems)
 	}
 
-	const toggleCartItemQuanitity = (id: number, value: "inc" | "dec") => {
-		foundProduct = cartItems.find((item: Group) => item._id === id)
-		index = cartItems.findIndex((product: Group) => product._id === id)
-		const newCartItems = cartItems.filter((item: Group) => item._id !== id)
-
+	const toggleCartItemQuantity = (id: number, value: "inc" | "dec") => {
 		if (value === "inc") {
-			setCartItems([
-				...newCartItems,
-				{ ...foundProduct!, quantity: foundProduct!.quantity + 1 },
-			])
-			setTotalPrice(
-				prevTotalPrice => prevTotalPrice + foundProduct!.price
-			)
-			setTotalQuantities(prevTotalQuantities => prevTotalQuantities + 1)
+			const newCartItems = cartItems.map(product => {
+				if (product._id === id) {
+					setTotalPrice(
+						prevTotalPrice => prevTotalPrice + product.price
+					)
+					setTotalQuantities(
+						prevTotalQuantities => prevTotalQuantities + 1
+					)
+					product.quantity += 1
+				}
+				return product
+			})
+
+			setCartItems(newCartItems)
 		} else if (value === "dec") {
-			if (foundProduct!.quantity > 1) {
-				setCartItems([
-					...newCartItems,
-					{ ...foundProduct!, quantity: foundProduct!.quantity - 1 },
-				])
-				setTotalPrice(
-					prevTotalPrice => prevTotalPrice - foundProduct!.price
-				)
-				setTotalQuantities(
-					prevTotalQuantities => prevTotalQuantities - 1
-				)
-			}
+			const newCartItems = cartItems.map(product => {
+				if (product._id === id && product.quantity > 1) {
+					setTotalPrice(
+						prevTotalPrice => prevTotalPrice - product.price
+					)
+					setTotalQuantities(
+						prevTotalQuantities => prevTotalQuantities - 1
+					)
+					product.quantity -= 1
+				}
+				return product
+			})
+			setCartItems(newCartItems)
 		}
 	}
 
@@ -159,7 +163,7 @@ export const StateContext = ({ children }: IStateContextProps) => {
 				qty,
 				incQty,
 				decQty,
-				toggleCartItemQuanitity,
+				toggleCartItemQuantity,
 				onRemove,
 			}}>
 			{children}

@@ -23,7 +23,7 @@ const Cart = () => {
 		totalQuantities,
 		cartItems,
 		setShowCart,
-		toggleCartItemQuanitity,
+		toggleCartItemQuantity,
 		onRemove,
 	} = useStateContext() as AppContextInterface
 
@@ -107,7 +107,7 @@ const Cart = () => {
 												<span
 													className={styles.minus}
 													onClick={() =>
-														toggleCartItemQuanitity(
+														toggleCartItemQuantity(
 															item._id,
 															"dec"
 														)
@@ -120,7 +120,7 @@ const Cart = () => {
 												<span
 													className={styles.plus}
 													onClick={() =>
-														toggleCartItemQuanitity(
+														toggleCartItemQuantity(
 															item._id,
 															"inc"
 														)
