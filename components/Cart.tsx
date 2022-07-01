@@ -13,7 +13,6 @@ import type { AppContextInterface } from "../context/StateContext"
 
 import { useStateContext } from "../context/StateContext"
 import { urlFor } from "../lib/client"
-import { TProductDetail } from "../pages/product/[slug]"
 // import getStripe from "../lib/getStripe"
 import styles from "../styles/Cart.module.scss"
 
