@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { IParamsProps, TProduct } from "../[slug]"
+import { IParamsProps, TProduct, TProductDetail } from "../[slug]"
 import Image from "next/image"
 import { client, urlFor } from "../../../lib/client"
 import firesaleconfetti from "../../../lib/utils"
@@ -36,10 +36,14 @@ interface IFiresaleProps {
 const Firesale = ({ firesale }: IFiresaleProps) => {
 	const { name, desc, price, image, discount } = firesale[0]
 
-	console.log(firesale)
-
-	const { incQty, decQty, qty, addToCart } =
+	const { incQty, decQty, qty, addToCart, setQty, setShowCart } =
 		useStateContext() as AppContextInterface
+
+	const buyNow = (product: TFiresale, quantity: number) => {
+		addToCart(product, quantity)
+		setQty(1)
+		setShowCart(true)
+	}
 
 	useEffect(() => {
 		firesaleconfetti()
@@ -97,7 +101,10 @@ const Firesale = ({ firesale }: IFiresaleProps) => {
 							onClick={() => addToCart(firesaleObject, qty)}>
 							Add to Cart
 						</button>
-						<button type="button" className={styles.buyNow}>
+						<button
+							type="button"
+							className={styles.buyNow}
+							onClick={() => buyNow(firesaleObject, qty)}>
 							Buy Now
 						</button>
 					</div>

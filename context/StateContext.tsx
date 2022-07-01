@@ -45,7 +45,6 @@ export const StateContext = ({ children }: IStateContextProps) => {
 	const [qty, setQty] = useState(1)
 
 	let foundProduct: Group | undefined
-	let index: number
 
 	const addToCart = (product: Group, quantity: number) => {
 		const isProductInCart = cartItems.find(

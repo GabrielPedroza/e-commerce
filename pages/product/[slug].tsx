@@ -35,10 +35,16 @@ interface IProductDetailsProps {
 const ProductDetails = ({ product, products }: IProductDetailsProps) => {
 	const { image, name, description, price, slug } = product
 
-	const { incQty, decQty, qty, addToCart } =
+	const { incQty, decQty, qty, addToCart, setShowCart, setQty } =
 		useStateContext() as AppContextInterface
 
 	const [index, setIndex] = useState(0)
+
+	const buyNow = (product: TProductDetail, quantity: number) => {
+		addToCart(product, quantity)
+		setQty(1)
+		setShowCart(true)
+	}
 
 	const src = urlFor(image && image[index]!)?.url() ?? "No image"
 
@@ -112,7 +118,10 @@ const ProductDetails = ({ product, products }: IProductDetailsProps) => {
 						onClick={() => addToCart(product, qty)}>
 						Add to Cart
 					</button>
-					<button type="button" className={styles.buyNow}>
+					<button
+						type="button"
+						className={styles.buyNow}
+						onClick={() => buyNow(product, qty)}>
 						Buy Now
 					</button>
 				</div>
