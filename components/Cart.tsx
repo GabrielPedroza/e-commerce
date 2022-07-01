@@ -59,7 +59,9 @@ const Cart = () => {
 					<AiOutlineLeft />
 					<span className={styles.heading}>Your Cart</span>
 					<span className={styles.cartNumItems}>
-						({totalQuantities} items)
+						{`(${totalQuantities} ${
+							totalQuantities === 1 ? `item` : `items`
+						})`}
 					</span>
 				</button>
 
