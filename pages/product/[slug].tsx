@@ -147,6 +147,52 @@ const ProductDetails = ({ product, products }: IProductDetailsProps) => {
 									</Fragment>
 								)
 						)}
+						{products.map(
+							(item, i) =>
+								slug.current !== item.slug.current && ( // current product isn't shown in the marquee
+									<Fragment key={i}>
+										<div className={styles.Pimage}>
+											<Link
+												href={`/product/${item.slug.current}`}
+												passHref>
+												<Image
+													loader={() => src}
+													unoptimized
+													src={urlFor(
+														item.image[0]!
+													)?.url()}
+													layout="fill"
+													alt={`${name}. It costs ${price}`}
+													className={styles.marquee}
+												/>
+											</Link>
+										</div>
+									</Fragment>
+								)
+						)}
+						{products.map(
+							(item, i) =>
+								slug.current !== item.slug.current && ( // current product isn't shown in the marquee
+									<Fragment key={i}>
+										<div className={styles.Pimage}>
+											<Link
+												href={`/product/${item.slug.current}`}
+												passHref>
+												<Image
+													loader={() => src}
+													unoptimized
+													src={urlFor(
+														item.image[0]!
+													)?.url()}
+													layout="fill"
+													alt={`${name}. It costs ${price}`}
+													className={styles.marquee}
+												/>
+											</Link>
+										</div>
+									</Fragment>
+								)
+						)}
 					</Marquee>
 				</div>
 			</div>
