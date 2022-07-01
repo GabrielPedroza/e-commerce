@@ -2,10 +2,9 @@ import { urlFor } from "../lib/client"
 import Link from "next/link"
 import Image from "next/image"
 import { SanityImageSource } from "@sanity/image-url/lib/types/types"
-import imgStyle from "../styles/FiresaleImage.module.scss"
 interface IFiresaleProps {
 	name: string
-	image: SanityImageSource
+	image: SanityImageSource[]
 	price: number
 	discount: number
 	desc: string
@@ -33,7 +32,7 @@ const Firesale = ({
 	desc,
 	...rest // for future developers that wish to fork this repo and add more props
 }: IFiresaleProps) => {
-	const src = urlFor(image && image!)?.url()
+	const src = urlFor(image && image[0]!)?.url()
 
 	return (
 		<>
@@ -46,9 +45,7 @@ const Firesale = ({
 							<h2 className="firesale-h2__title">
 								🔥 Firesale of the day 🔥
 							</h2>
-							<h2
-								className="firesale-h2"
-							>
+							<h2 className="firesale-h2">
 								{`${discount && discount!}% off`}
 							</h2>
 							<h3 className="firesale-h3">{`$${

@@ -17,6 +17,7 @@ import type { AppContextInterface } from "../../context/StateContext"
 export type TProductDetail = {
 	image: SanityImageSource[]
 	name: string
+	type: "product"
 	slug: {
 		current: string
 	}

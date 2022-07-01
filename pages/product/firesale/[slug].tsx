@@ -6,15 +6,25 @@ import firesaleconfetti from "../../../lib/utils"
 import styles from "../../../styles/EnhancedFiresale.module.scss"
 import { SanityImageSource } from "@sanity/image-url/lib/types/types"
 import {
+	AppContextInterface,
+	useStateContext,
+} from "../../../context/StateContext"
+import {
 	AiFillStar,
 	AiOutlineMinus,
 	AiOutlinePlus,
 	AiOutlineStar,
 } from "react-icons/ai"
 
-type TFiresale = {
+export type TFiresale = {
+	_id: number
+	type: "firesale"
+	slug: {
+		current: string
+	}
 	name: string
-	image: SanityImageSource
+	quantity: number
+	image: SanityImageSource[]
 	desc: string
 	price: number
 	discount: number
@@ -25,11 +35,19 @@ interface IFiresaleProps {
 
 const Firesale = ({ firesale }: IFiresaleProps) => {
 	const { name, desc, price, image, discount } = firesale[0]
+
+	console.log(firesale)
+
+	const { incQty, decQty, qty, addToCart } =
+		useStateContext() as AppContextInterface
+
 	useEffect(() => {
 		firesaleconfetti()
 	}, [])
 
-	const src = urlFor(image && image!)?.url() ?? "No image"
+	const src = urlFor(image && image[0]!)?.url() ?? "No image"
+
+	const firesaleObject = firesale[0]
 
 	return (
 		<>
@@ -63,17 +81,20 @@ const Firesale = ({ firesale }: IFiresaleProps) => {
 					<div className={styles.quantities}>
 						<h3>Quantity:</h3>
 						<p className={styles.quantityDesc}>
-							<span className={styles.minus}>
+							<span className={styles.minus} onClick={decQty}>
 								<AiOutlineMinus />
 							</span>
-							<span className={styles.num}>1</span>
-							<span className={styles.plus}>
+							<span className={styles.num}>{qty}</span>
+							<span className={styles.plus} onClick={incQty}>
 								<AiOutlinePlus />
 							</span>
 						</p>
 					</div>
 					<div className={styles.buttons}>
-						<button type="button" className={styles.addToCart}>
+						<button
+							type="button"
+							className={styles.addToCart}
+							onClick={() => addToCart(firesaleObject, qty)}>
 							Add to Cart
 						</button>
 						<button type="button" className={styles.buyNow}>

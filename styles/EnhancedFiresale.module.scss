@@ -34,10 +34,103 @@
 	margin-bottom: 0.25rem;
 }
 
+.LimageContainer {
+	display: flex;
+	margin-bottom: 0.5rem;
+	margin-top: -1rem;
+}
+
 .Limage {
 	position: relative;
+	margin: 0.15rem;
+	width: 30px;
+	height: 30px;
+	transition: 0.3s;
+}
+
+.selectedImage {
+	transition: 0.3s;
+	filter: brightness(50%);
 }
 
 .productDetailDesc {
 	margin-top: 2rem;
+}
+
+.quant,
+.quantityDesc {
+	display: inline-block;
+}
+
+.minus,
+.plus,
+.quantityDesc {
+	padding: 0.25rem 1.5rem;
+}
+
+.minus,
+.plus {
+	cursor: pointer;
+}
+
+.minus {
+	border: 2px solid #8d0e0e;
+	margin-left: -1.5rem;
+	margin-right: 1.5rem;
+	background-color: #f5a199;
+}
+
+.plus {
+	border: 2px solid #177f0d;
+	background-color: #caf9c4;
+	margin-left: 1.5rem;
+	margin-right: -1.5rem;
+}
+
+.quantityDesc {
+	margin-left: 1rem;
+	border: 1.5px solid #ccc;
+}
+
+.buttons {
+	display: flex;
+	justify-content: space-around;
+	margin: 2rem;
+}
+
+.addToCart,
+.buyNow {
+	border: 2px solid #ff8c00;
+	transition: 0.3s;
+	background-color: #fbb741;
+	padding: 1rem 4rem;
+	cursor: pointer;
+	font-size: 1.25rem;
+	white-space: nowrap;
+
+	&:hover {
+		background-color: orange;
+	}
+}
+
+.addToCart {
+	margin-right: 0.5rem;
+}
+
+.marqueeContainer {
+	position: relative;
+	cursor: pointer;
+}
+
+.h4 {
+	text-align: center;
+	font-size: 1.5rem;
+	margin-bottom: 1rem;
+}
+
+.Pimage {
+	position: relative;
+	width: 200px;
+	height: 200px;
+	margin: 0.25rem;
 }

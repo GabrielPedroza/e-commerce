@@ -7,26 +7,29 @@ import React, {
 	Dispatch,
 } from "react"
 import { toast } from "react-toastify"
+import { TFiresale } from "../pages/product/firesale/[slug]"
 import type { TProductDetail } from "../pages/product/[slug]"
 
 interface IStateContextProps {
 	children: ReactChild | ReactChild[]
 }
 
+type Group = TFiresale | TProductDetail
+
 export interface AppContextInterface {
 	qty: number
 	showCart: boolean
-	cartItems: Array<TProductDetail>
+	cartItems: Array<Group>
 	totalPrice: number
 	setTotalPrice: Dispatch<SetStateAction<number>>
 	setQty: Dispatch<SetStateAction<number>>
-	setCartItems: Dispatch<SetStateAction<Array<TProductDetail>>>
+	setCartItems: Dispatch<SetStateAction<Array<Group>>>
 	totalQuantities: number
 	setTotalQuantities: Dispatch<SetStateAction<number>>
 	setShowCart: Dispatch<SetStateAction<boolean>>
 	incQty: () => void
 	decQty: () => void
-	addToCart: (product: TProductDetail, quantity: number) => void
+	addToCart: (product: Group, quantity: number) => void
 	toggleCartItemQuanitity: Function
 	onRemove: Function
 }
@@ -35,24 +38,24 @@ const Context = createContext<AppContextInterface | null>(null)
 
 export const StateContext = ({ children }: IStateContextProps) => {
 	const [showCart, setShowCart] = useState(false)
-	const [cartItems, setCartItems] = useState<TProductDetail[]>([])
+	const [cartItems, setCartItems] = useState<any[]>([]) // fix type later
 	const [totalPrice, setTotalPrice] = useState(0)
 	const [totalQuantities, setTotalQuantities] = useState(0)
 	const [qty, setQty] = useState(1)
 
-	let foundProduct: TProductDetail | undefined
+	let foundProduct: Group | undefined
 	let index
 
-	const addToCart = (product: TProductDetail, quantity: number) => {
+	const addToCart = (product: Group, quantity: number) => {
 		const isProductInCart = cartItems.find(
-			item => item.slug.current === product.slug.current
-		) // boolean
+			(item: Group) => item.slug.current === product.slug.current
+		) // returns undefined or the value
 
 		setTotalPrice(prevTotal => prevTotal + product.price * quantity)
 		setTotalQuantities(prevTotal => prevTotal + quantity)
 
 		if (isProductInCart) {
-			const updateCart = cartItems.map(currentProduct => {
+			const updateCart = cartItems.map((currentProduct: Group) => {
 				if (currentProduct._id === product._id) {
 					return {
 						...currentProduct, // to not lose image and name of product
@@ -60,10 +63,9 @@ export const StateContext = ({ children }: IStateContextProps) => {
 					}
 				}
 			})
-			/* @ts-ignore */
 			setCartItems(updateCart)
 		} else {
-			setCartItems(prev => [...prev, { ...product, quantity }])
+			setCartItems((prev: Group[]) => [...prev, { ...product, quantity }])
 		}
 
 		toast.success(
@@ -96,8 +98,10 @@ export const StateContext = ({ children }: IStateContextProps) => {
 	}
 
 	const onRemove = (product: TProductDetail) => {
-		foundProduct = cartItems.find(item => item._id === product._id)
-		const newCartItems = cartItems.filter(item => item._id !== product._id)
+		foundProduct = cartItems.find((item: Group) => item._id === product._id)
+		const newCartItems = cartItems.filter(
+			(item: Group) => item._id !== product._id
+		)
 
 		setTotalPrice(
 			prevTotalPrice =>
@@ -110,9 +114,9 @@ export const StateContext = ({ children }: IStateContextProps) => {
 	}
 
 	const toggleCartItemQuanitity = (id: number, value: "inc" | "dec") => {
-		foundProduct = cartItems.find(item => item._id === id)
-		index = cartItems.findIndex(product => product._id === id)
-		const newCartItems = cartItems.filter(item => item._id !== id)
+		foundProduct = cartItems.find((item: Group) => item._id === id)
+		index = cartItems.findIndex((product: Group) => product._id === id)
+		const newCartItems = cartItems.filter((item: Group) => item._id !== id)
 
 		if (value === "inc") {
 			setCartItems([
