@@ -2,7 +2,8 @@ import { AiOutlineShopping } from "react-icons/ai"
 import Link from "next/link"
 import Image from "next/image"
 import styles from "../styles/Navbar.module.scss"
-import { AppContextInterface, useStateContext } from "../context/StateContext"
+import { useStateContext } from "../context/StateContext"
+import type { AppContextInterface } from '../context/StateContext'
 import Cart from "./Cart"
 
 const Navbar = () => {

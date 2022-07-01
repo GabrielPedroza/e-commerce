@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { forwardRef, Fragment, useState } from "react"
+import { Fragment, useState } from "react"
 import { client, urlFor } from "../../lib/client"
 import {
 	AiOutlineMinus,
@@ -12,6 +12,7 @@ import { SanityImageSource } from "@sanity/image-url/lib/types/types"
 import Marquee from "react-fast-marquee"
 import Link from "next/link"
 import { useStateContext } from "../../context/StateContext"
+import type { AppContextInterface } from "../../context/StateContext"
 
 export type TProductDetail = {
 	image: SanityImageSource[]
@@ -33,7 +34,8 @@ interface IProductDetailsProps {
 const ProductDetails = ({ product, products }: IProductDetailsProps) => {
 	const { image, name, description, price, slug } = product
 
-	const { incQty, decQty, qty, addToCart } = useStateContext()
+	const { incQty, decQty, qty, addToCart } =
+		useStateContext() as AppContextInterface
 
 	const [index, setIndex] = useState(0)
 
