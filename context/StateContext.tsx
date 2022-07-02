@@ -46,25 +46,32 @@ export const StateContext = ({ children }: IStateContextProps) => {
 	let foundProduct: Group | undefined
 
 	const addToCart = (product: Group, quantity: number) => {
-		const isProductInCart = cartItems.find(
-			(item: Group) => item.slug.current === product.slug.current
-		) // returns undefined or the value
+		const isProductInCart = cartItems.some(
+			(item: Group) => item?.slug?.current === product?.slug?.current
+		) // returns boolean
+
+		console.log("isproduct", isProductInCart)
+		console.log("product", product)
 
 		setTotalPrice(prevTotal => prevTotal + product.price * quantity)
 		setTotalQuantities(prevTotal => prevTotal + quantity)
 
 		if (isProductInCart) {
 			const updateCart = cartItems.map((currentProduct: Group) => {
-				if (currentProduct._id === product._id) {
+				if (currentProduct?._id === product?._id) {
 					return {
 						...currentProduct, // to not lose image and name of product
 						quantity: currentProduct?.quantity + quantity,
 					}
 				}
+				return currentProduct
 			})
-			setCartItems(updateCart)
+			setCartItems(prev => (prev = updateCart))
 		} else {
-			setCartItems((prev: Group[]) => [...prev, { ...product, quantity }])
+			setCartItems((prev: Group[]) => [
+				...prev,
+				{ ...(product as object), quantity },
+			])
 		}
 
 		toast.success(
@@ -83,6 +90,7 @@ export const StateContext = ({ children }: IStateContextProps) => {
 
 		setQty(c => (c = 1))
 	}
+	console.log(cartItems)
 
 	const incQty = () => {
 		setQty(prevQ => prevQ + 1)
@@ -109,7 +117,7 @@ export const StateContext = ({ children }: IStateContextProps) => {
 		setTotalQuantities(
 			prevTotalQuantities => prevTotalQuantities - foundProduct!.quantity
 		)
-		setCartItems(newCartItems)
+		setCartItems(prev => (prev = newCartItems))
 	}
 
 	const toggleCartItemQuantity = (id: number, value: "inc" | "dec") => {

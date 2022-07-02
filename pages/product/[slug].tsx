@@ -159,11 +159,11 @@ const ProductDetails = ({ product, products }: IProductDetailsProps) => {
 						)}
 						{products.map(
 							(item, i) =>
-								slug.current !== item.slug.current && ( // current product isn't shown in the marquee
+								slug?.current !== item?.slug?.current && ( // current product isn't shown in the marquee
 									<Fragment key={i}>
 										<div className={styles.Pimage}>
 											<Link
-												href={`/product/${item.slug.current}`}
+												href={`/product/${item?.slug?.current}`}
 												passHref>
 												<Image
 													loader={() => src}

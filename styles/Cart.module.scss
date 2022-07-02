@@ -1,6 +1,7 @@
 .cartWrapper {
 	width: 100vw;
-	background: rgba(0, 0, 0, 0.5);
+	// overflow: hidden;
+	background: rgba(0, 0, 0, 0.25);
 	position: fixed;
 	right: 0;
 	top: 0;
@@ -11,12 +12,12 @@
 
 .pImage {
 	position: relative;
-	width: 150px;
+	min-width: 150px;
 }
 
 .cartContainer {
 	height: 100vh;
-	width: 600px;
+	min-width: 500px;
 	background-color: white;
 	float: right;
 	padding: 40px 10px;
@@ -347,22 +348,22 @@
 		animation: marquee 10s linear infinite;
 		width: 550%;
 	}
-	.success-wrapper,
-	.cancel-wrapper {
-		min-height: 69vh;
-	}
-	.success,
-	.cancel {
-		width: 370px;
-		margin-top: 100px;
-		padding: 20px;
-	}
-	.success {
-		height: 350px;
-	}
-	.success h2 {
-		font-size: 17px;
-	}
+	// .success-wrapper,
+	// .cancel-wrapper {
+	// 	min-height: 69vh;
+	// }
+	// .success,
+	// .cancel {
+	// 	width: 370px;
+	// 	margin-top: 100px;
+	// 	padding: 20px;
+	// }
+	// .success {
+	// 	height: 350px;
+	// }
+	// .success h2 {
+	// 	font-size: 17px;
+	// }
 	.btnContainer {
 		width: 300px;
 		margin: auto;

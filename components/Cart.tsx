@@ -13,6 +13,7 @@ import { useStateContext } from "../context/StateContext"
 import { urlFor } from "../lib/client"
 import getStripe from "../lib/getStripe"
 import styles from "../styles/Cart.module.scss"
+import { Fragment } from "react"
 
 const Cart = () => {
 	const {
@@ -23,6 +24,8 @@ const Cart = () => {
 		toggleCartItemQuantity,
 		onRemove,
 	} = useStateContext() as AppContextInterface
+
+	console.log(cartItems)
 
 	const handleCheckout = async () => {
 		const stripe = await getStripe()
@@ -42,9 +45,7 @@ const Cart = () => {
 		toast.loading("Redirecting...")
 
 		stripe.redirectToCheckout({ sessionId: data.id })
-		console.log(cartItems)
 	}
-
 
 	return (
 		<div className={styles.cartWrapper}>
@@ -79,80 +80,96 @@ const Cart = () => {
 
 				<div className={styles.productContainer}>
 					{cartItems.length >= 1 &&
-						cartItems.map(item => (
-							<div className={styles.product} key={item._id}>
-								<div className={styles.pImage}>
-									<Image
-										layout="fill"
-										loader={() =>
-											urlFor(item?.image[0]!).url()
-										}
-										src={urlFor(item?.image[0]!).url()}
-										alt={`Image of ${item}`}
-									/>
-								</div>
-								<div className={styles.itemDesc}>
-									<div
-										className={`${styles.flex} ${styles.top}`}>
-										<h5>{item.name}</h5>
-										<h4>${item.price}</h4>
-									</div>
-									<div
-										className={`${styles.flex} ${styles.bottom}`}>
-										<div>
-											<p className={styles.quantityDesc}>
-												<span
-													className={styles.minus}
-													onClick={() =>
-														toggleCartItemQuantity(
-															item._id,
-															"dec"
-														)
-													}>
-													<AiOutlineMinus />
-												</span>
-												<span className={styles.num}>
-													{item.quantity}
-												</span>
-												<span
-													className={styles.plus}
-													onClick={() =>
-														toggleCartItemQuantity(
-															item._id,
-															"inc"
-														)
-													}>
-													<AiOutlinePlus />
-												</span>
-											</p>
+						cartItems.map(item => {
+							const src = urlFor(item?.image[0])?.url()
+							return (
+								<Fragment key={item._id}>
+									<div className={styles.product}>
+										<div className={styles.pImage}>
+											<Image
+												layout="fill"
+												unoptimized
+												loader={() => src}
+												src={src}
+												alt={`Image of ${item}`}
+											/>
 										</div>
-										<button
-											type="button"
-											className={styles.removeItem}
-											onClick={() => onRemove(item)}>
-											<TiDeleteOutline />
-										</button>
+										<div className={styles.itemDesc}>
+											<div
+												className={`${styles.flex} ${styles.top}`}>
+												<h5>{item.name}</h5>
+												<h4>${item.price}</h4>
+											</div>
+											<div
+												className={`${styles.flex} ${styles.bottom}`}>
+												<div>
+													<p
+														className={
+															styles.quantityDesc
+														}>
+														<span
+															className={
+																styles.minus
+															}
+															onClick={() =>
+																toggleCartItemQuantity(
+																	item._id,
+																	"dec"
+																)
+															}>
+															<AiOutlineMinus />
+														</span>
+														<span
+															className={
+																styles.num
+															}>
+															{item.quantity}
+														</span>
+														<span
+															className={
+																styles.plus
+															}
+															onClick={() =>
+																toggleCartItemQuantity(
+																	item._id,
+																	"inc"
+																)
+															}>
+															<AiOutlinePlus />
+														</span>
+													</p>
+												</div>
+												<button
+													type="button"
+													className={
+														styles.removeItem
+													}
+													onClick={() =>
+														onRemove(item)
+													}>
+													<TiDeleteOutline />
+												</button>
+											</div>
+										</div>
 									</div>
-								</div>
-							</div>
-						))}
+									<div className={styles.cartBottom}>
+										<div className={styles.total}>
+											<h3>Subtotal:</h3>
+											<h3>${totalPrice}</h3>
+										</div>
+										<div className={styles.btnContainer}>
+											<button
+												type="button"
+												className={styles.btn}
+												onClick={handleCheckout}>
+												Pay with Stripe
+											</button>
+										</div>
+									</div>
+								</Fragment>
+							)
+						})}
 				</div>
-				{cartItems.length >= 1 && (
-					<div className={styles.cartBottom}>
-						<div className={styles.total}>
-							<h3>Subtotal:</h3>
-							<h3>${totalPrice}</h3>
-						</div>
-						<div className={styles.btnContainer}>
-							<button
-								type="button"
-								className={styles.btn}
-								onClick={handleCheckout}>
-								Pay with Stripe
-							</button>
-						</div>
-					</div>
-				)}
 			</div>
 		</div>
 	)
