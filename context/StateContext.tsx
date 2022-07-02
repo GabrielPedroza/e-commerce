@@ -50,9 +50,6 @@ export const StateContext = ({ children }: IStateContextProps) => {
 			(item: Group) => item?.slug?.current === product?.slug?.current
 		) // returns boolean
 
-		console.log("isproduct", isProductInCart)
-		console.log("product", product)
-
 		setTotalPrice(prevTotal => prevTotal + product.price * quantity)
 		setTotalQuantities(prevTotal => prevTotal + quantity)
 

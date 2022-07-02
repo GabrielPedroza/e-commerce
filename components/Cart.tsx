@@ -25,8 +25,6 @@ const Cart = () => {
 		onRemove,
 	} = useStateContext() as AppContextInterface
 
-	console.log(cartItems)
-
 	const handleCheckout = async () => {
 		const stripe = await getStripe()
 

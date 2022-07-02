@@ -37,43 +37,36 @@ const Firesale = ({
 	return (
 		<>
 			<Link href={`/product/firesale/${slug.current}`} passHref>
-				<div role="contentinfo">
-					<>
-						<div
-							className="firesale-container"
-							aria-roledescription="This is a single item that we showcase to show our customers the hottest deal of the day. As the same implies, the deal will last for 24 hours EST.">
-							<h2 className="firesale-h2__title">
-								🔥 Firesale of the day 🔥
-							</h2>
-							<h2 className="firesale-h2">
-								{`${discount && discount!}% off`}
-							</h2>
-							<h3 className="firesale-h3">{`$${
-								price && price!
-							}`}</h3>
-							<div className={"firesale-image"}>
-								<Image
-									loader={() => src}
-									src={src}
-									priority
-									unoptimized
-									layout="fill"
-									objectFit="cover"
-									alt={`Picture of ${name}. It only costs ${price} dollars!`}
-								/>
-							</div>
-							<p
-								aria-label="Name of product"
-								className="firesale-h5">
-								{name && name!}
-							</p>
-							<p
-								aria-label="Description of product"
-								className="firesale-p">
-								{desc && desc!}
-							</p>
-						</div>
-					</>
+				<div
+					role="contentinfo"
+					className="firesale-container"
+					aria-roledescription="This is a single item that we showcase to show our customers the hottest deal of the day. As the same implies, the deal will last for 24 hours EST.">
+					<h2 className="firesale-h2__title">
+						🔥 Firesale of the day 🔥
+					</h2>
+					<h2 className="firesale-h2">
+						{`${discount && discount!}% off`}
+					</h2>
+					<h3 className="firesale-h3">{`$${price && price!}`}</h3>
+					<div className={"firesale-image"}>
+						<Image
+							loader={() => src}
+							src={src}
+							priority
+							unoptimized
+							layout="fill"
+							objectFit="cover"
+							alt={`Picture of ${name}. It only costs ${price} dollars!`}
+						/>
+					</div>
+					<p aria-label="Name of product" className="firesale-h5">
+						{name && name!}
+					</p>
+					<p
+						aria-label="Description of product"
+						className="firesale-p">
+						{desc && desc!}
+					</p>
 				</div>
 			</Link>
 		</>
