@@ -110,6 +110,7 @@
 @media screen and (min-width: 950px) {
 	.firesale-container {
 		display: grid;
+		overflow: hidden;
 		min-width: 400px;
 		max-width: 900px;
 		border: 12px solid orange;
