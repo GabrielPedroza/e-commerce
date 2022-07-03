@@ -1,0 +1,36 @@
+.card {
+	width: 95%;
+	height: 95%;
+	margin: 1rem auto;
+}
+
+.container {
+	position: relative;
+	width: 300px;
+	height: 300px;
+	border-radius: 50%;
+	background-color: #90ee90;
+	margin: 1rem auto;
+}
+
+.checkmark {
+	color: green;
+	font-size: 10rem;
+	position: absolute;
+	transform: translate(75px, 55px);
+}
+
+.title {
+	color: green;
+	text-align: center;
+	margin: 1.5rem 0;
+	font-size: 3rem;
+}
+
+.desc {
+	font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+	font: 2rem;
+	margin: 2rem auto;
+	text-align: center;
+	font-weight: bolder;
+}

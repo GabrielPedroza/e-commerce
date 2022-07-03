@@ -1,13 +1,18 @@
-import React from "react"
+import React, { useEffect } from "react"
+import styles from "../styles/Success.module.scss"
+import { interval } from "../lib/utils"
 
-const success = () => {
+const Success = () => {
+	useEffect(() => {
+		interval
+	}, [])
 	return (
-		<div className="s-card">
-			<div className="s-container">
-				<i className="checkmark">✓</i>
+		<div className={styles.card}>
+			<div className={styles.container}>
+				<i className={styles.checkmark}>✓</i>
 			</div>
-			<h1 className="s-title">Success</h1>
-			<p className="s-p">
+			<h1 className={styles.title}>Success</h1>
+			<p className={styles.desc}>
 				We received your purchase request;
 				<br />
 				we&apos;ll be in touch shortly!
@@ -16,6 +21,4 @@ const success = () => {
 	)
 }
 
-// style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;"
-
-export default success
+export default Success
