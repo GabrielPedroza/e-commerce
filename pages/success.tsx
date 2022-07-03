@@ -1,10 +1,10 @@
 import React, { useEffect } from "react"
 import styles from "../styles/Success.module.scss"
-import { interval } from "../lib/utils"
+import { successPageConfetti } from "../lib/utils"
 
 const Success = () => {
 	useEffect(() => {
-		interval
+		successPageConfetti()
 	}, [])
 	return (
 		<div className={styles.card}>

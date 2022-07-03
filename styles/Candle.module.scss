@@ -4,40 +4,15 @@ $background: #2d3d50;
 $flame: #ffad00;
 $flame-shadow: #ffad00;
 $wax: #6c7a89;
-$wax-shadow: 	#55616d;
+$wax-shadow: #55616d;
 $wick: #ad87a9;
 $stand: #1c233e;
 
-// .wrapper {
-// 	position: absolute;
-// 	top: 50%;
-// 	left: 50%;
-// 	width: 400px;
-// 	height: 400px;
-// 	margin-top: -200px;
-// 	margin-left: -200px;
-// 	border-radius: 4px;
-// 	box-shadow: 4px 8px 16px 0 #00000010;
-// 	overflow: hidden;
-// 	background: $background;
-// }
-
-// to center the candle i used another div with transform on it
-
-// .center {
-// 	position: absolute;
-// 	top: 50%;
-// 	left: 50%;
-// 	transform: translate(-50%, -50%);
-// }
-
-// candle nesting
-
 .candle {
 	display: flex;
-    margin-top: 2rem;
-    margin-bottom: -5rem;
-    position: relative;
+	margin-top: 2rem;
+	margin-bottom: -5rem;
+	position: relative;
 	flex-direction: column;
 	align-items: center;
 
